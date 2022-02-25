@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Products from "../../components/products/Products";
+import { addToCart } from "../../utils/cart";
 
 const ProductsPage = () => {
 	const [products, setProducts] = useState([]);
@@ -15,8 +16,17 @@ const ProductsPage = () => {
 		getData();
 		return () => {};
 	}, []);
-	const handleAddToCart = (id) => {
-		console.log(id);
+
+	const handleAddToCart = async (id) => {
+		const res = await fetch(
+			`https://zgup9d.sse.codesandbox.io/products/${id}`,
+			{
+				method: "GET",
+			}
+		);
+		const { featured_image, price, title } = await res.json();
+
+		addToCart({ featured_image, price, id, title, amount: 1 });
 	};
 	return (
 		<div className="grid grid-cols-3 gap-4">
