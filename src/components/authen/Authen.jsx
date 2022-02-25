@@ -1,7 +1,7 @@
 import React from "react";
 
 const Authen = () => {
-	return <div>Auten</div>;
+	return <div>Authen</div>;
 };
 
 export default Authen;
