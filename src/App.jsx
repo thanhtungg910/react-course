@@ -1,7 +1,7 @@
 import Header from "./components/header/Header";
 import { Route, Routes } from "react-router-dom";
-import ProductsPage from "./components/pages/products/ProductsPage";
-import HomePage from "./components/pages/home/HomePage";
+import ProductsPage from "./containers/products/ProductsPage";
+import HomePage from "./containers/home/HomePage";
 function App() {
 	return (
 		<div className="mx-auto max-w-5xl">
