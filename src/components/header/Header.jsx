@@ -1,7 +1,11 @@
 import React from "react";
-
+import Nav from "../partials/Nav";
 const Header = () => {
-	return <div></div>;
+	return (
+		<header>
+			<Nav />
+		</header>
+	);
 };
 
 export default Header;
