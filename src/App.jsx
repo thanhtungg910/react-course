@@ -4,7 +4,7 @@ import ProductsPage from "./containers/products/ProductsPage";
 import HomePage from "./containers/home/HomePage";
 function App() {
 	return (
-		<div className="mx-auto max-w-5xl">
+		<div className="mx-auto max-w-5xl min-h-screen text-white bg-gradient-to-r from-[#75629A] to-[#C3B3B9]">
 			<Header />
 			<main>
 				<Routes>

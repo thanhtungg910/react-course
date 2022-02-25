@@ -1,9 +1,10 @@
 import React from "react";
+import CTA from "../../components/home/CTA";
 
 const HomePage = () => {
 	return (
 		<div>
-			<h1>Homepage</h1>
+			<CTA />
 		</div>
 	);
 };
