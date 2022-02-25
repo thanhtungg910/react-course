@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "../partials/Nav";
 const Header = () => {
 	return (
-		<header>
+		<header className="">
 			<Nav />
 		</header>
 	);

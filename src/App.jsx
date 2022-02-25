@@ -4,9 +4,9 @@ import ProductsPage from "./components/pages/products/ProductsPage";
 import HomePage from "./components/pages/home/HomePage";
 function App() {
 	return (
-		<>
+		<div className="mx-auto max-w-5xl">
 			<Header />
-			<main className="mx-auto">
+			<main>
 				<Routes>
 					<Route path="/" element={<HomePage />}></Route>
 					<Route path="/products" element={<ProductsPage />}></Route>
@@ -14,7 +14,7 @@ function App() {
 					<Route path="/login" element={<h1>login</h1>}></Route>
 				</Routes>
 			</main>
-		</>
+		</div>
 	);
 }
 
