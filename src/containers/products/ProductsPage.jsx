@@ -6,7 +6,7 @@ const ProductsPage = () => {
 	const [products, setProducts] = useState([]);
 	useEffect(() => {
 		const getData = async () => {
-			const res = await fetch(`https://zgup9d.sse.codesandbox.io/products`, {
+			const res = await fetch(` http://localhost:3001/products`, {
 				method: "GET",
 			});
 			const data = await res.json();
@@ -18,12 +18,9 @@ const ProductsPage = () => {
 	}, []);
 
 	const handleAddToCart = async (id) => {
-		const res = await fetch(
-			`https://zgup9d.sse.codesandbox.io/products/${id}`,
-			{
-				method: "GET",
-			}
-		);
+		const res = await fetch(` http://localhost:3001/products/${id}`, {
+			method: "GET",
+		});
 		const { featured_image, price, title } = await res.json();
 
 		addToCart({ featured_image, price, id, title, amount: 1 });
