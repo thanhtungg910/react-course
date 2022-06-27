@@ -1,0 +1,18 @@
+@import 'antd/dist/antd.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+}
+.ant-menu-inline .ant-menu-item::after {
+    border: none;
+}
+.slick-dots.slick-dots-bottom {
+    li {
+        background-color: #000;
+    }
+}
