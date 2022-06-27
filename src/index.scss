@@ -12,6 +12,8 @@
     border: none;
 }
 .slick-dots.slick-dots-bottom {
+    z-index: 1;
+
     li {
         background-color: #000;
     }

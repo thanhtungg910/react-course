@@ -19,8 +19,6 @@ const SideBar = ({
     children,
     widthSideBar,
 }: props) => {
-    console.log('SideBar');
-
     if (MenuUnfoldOutlined && MenuFoldOutlined && setCollapsed) {
         return (
             <Sider
@@ -43,7 +41,7 @@ const SideBar = ({
         );
     }
     return (
-        <Sider theme="light" className="bg-bodyColor">
+        <Sider theme="light" className="bg-bodyColor hidden lg:block">
             {children}
         </Sider>
     );
