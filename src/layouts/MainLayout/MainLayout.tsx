@@ -8,6 +8,7 @@ import {
 import { Layout, Menu } from 'antd';
 import { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Chip from '../../components/Chip';
 import PlayerControl from '../../components/PlayerControl';
 import MainHeader from '../components/Header';
 import SideBar from '../components/SideBar';
@@ -68,13 +69,22 @@ const MainLayout = () => {
                         }}
                     >
                         <Outlet />
-                        <>
-                            <PlayerControl />
-                        </>
                     </Content>
                 </Layout>
-                <SideBar widthSideBar={400}>Sidebar right</SideBar>
+                <SideBar widthSideBar={400}>
+                    <div className="mt-4 ">
+                        <h2 className="text-xl font-sans font-black sm:text-2xl">Short cut</h2>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                        <Chip title="🎵 Chill Hits" />
+                        <Chip title="✨Hot" />
+                        <Chip title="🎶Indie Pop" />
+                        <Chip title="🎹Piano" />
+                        <Chip title="🎸Acoustics" type="a" href="/acd" />
+                    </div>
+                </SideBar>
             </Layout>
+            <PlayerControl />
         </>
     );
 };
