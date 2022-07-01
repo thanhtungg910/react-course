@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import Board from './components/Board/Board';
-import { GlobalStyles } from './GlobalStyles';
 
 const BoxListStyles = styled.div`
 	display: flex;
@@ -51,7 +50,6 @@ function App() {
 	};
 	return (
 		<>
-			<GlobalStyles />
 			<BoxListStyles>
 				<Board cells={board} onClick={handleClick} className={className} />
 				{winner && <H3Styled>Winner is {winner}</H3Styled>}
