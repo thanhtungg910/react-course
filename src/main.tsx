@@ -6,11 +6,11 @@ import { ThemeProvider } from 'styled-components';
 
 import App from './App';
 import GlobalStyles from './GlobalStyles';
-import 'antd/dist/antd.css';
 import './index.css';
 
 const theme = {
 	primary: '#D70018',
+	hoverBg: 'hsla(0,0%,100%,.2)',
 };
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

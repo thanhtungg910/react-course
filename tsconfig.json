@@ -21,7 +21,8 @@
 			"~/page/*": ["src/page/*"],
 			"~/layouts/*": ["src/layouts/*"],
 			"~/components/*": ["src/components/*"],
-			"~/assets/*": ["src/assets/*"]
+			"~/assets/*": ["src/assets/*"],
+			"~/modules/*": ["src/modules/*"]
 		}
 	},
 	"include": ["src"],

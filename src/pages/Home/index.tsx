@@ -1,5 +1,12 @@
-import React from 'react';
+import { ContainerStyled } from '~/GlobalClasses';
+import BlockTopHome from '~/modules/home/BlockTopHome/BlockTopHome';
 
 export const Home = () => {
-	return <div>Home</div>;
+	return (
+		<ContainerStyled>
+			<div>
+				<BlockTopHome></BlockTopHome>
+			</div>
+		</ContainerStyled>
+	);
 };
