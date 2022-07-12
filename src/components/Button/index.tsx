@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import styled from 'styled-components';
 export interface ButtonProps {
 	icon?: string | ReactNode;
+	rightIcon?: string;
+	bgHover?: string;
 	children: ReactNode;
 	href?: string;
 	className?: string;
@@ -11,15 +14,18 @@ export interface ButtonProps {
 	size?: any;
 }
 
-const ButtonStyled = styled.div`
+const ButtonStyled = styled.div<any>`
 	button,
 	a {
+		width: 100%;
 		padding: 5px 5px;
 		display: inline-flex;
 		align-items: center;
+		justify-content: center;
 		border-radius: 5px;
-		&:hover {
-			background-color: ${(props) => props.theme.hoverBg};
+		&:hover,
+		:active {
+			background-color: ${(props) => props.bgHover || props.theme.hoverBg};
 		}
 	}
 `;
@@ -37,12 +43,21 @@ const ContentStyled = styled.div<any>`
 		word-break: unset;
 	}
 `;
+const RightIconStyled = styled.div`
+	margin-left: auto;
+`;
+const IconStyled = styled.div`
+	margin-right: 5px;
+`;
+
 const Button = ({
 	icon,
 	color,
 	children,
 	size = '12px',
 	href,
+	rightIcon,
+	bgHover,
 	...passProps
 }: ButtonProps) => {
 	let Comp: string | React.ForwardRefExoticComponent<LinkProps> = 'button';
@@ -55,12 +70,12 @@ const Button = ({
 	}
 
 	return (
-		<ButtonStyled>
+		<ButtonStyled bgHover={bgHover}>
 			<Comp {...props}>
 				{icon && typeof icon === 'string' ? (
-					<div className='icon'>
+					<IconStyled>
 						<img src={icon} alt='' />
-					</div>
+					</IconStyled>
 				) : (
 					icon
 				)}
@@ -68,6 +83,11 @@ const Button = ({
 				<ContentStyled color={color} size={size}>
 					<p>{children}</p>
 				</ContentStyled>
+				{rightIcon && (
+					<RightIconStyled>
+						<img src={rightIcon} alt='' />
+					</RightIconStyled>
+				)}
 			</Comp>
 		</ButtonStyled>
 	);

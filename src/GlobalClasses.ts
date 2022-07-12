@@ -19,6 +19,9 @@ const flexCenter = css`
 	justify-content: center;
 	align-items: center;
 `;
-
-const mixins = { flexCenter };
+const flexAlignCenter = css`
+	display: flex;
+	align-items: center;
+`;
+const mixins = { flexCenter, flexAlignCenter };
 export { GlobalClasses, ContainerStyled, mixins };

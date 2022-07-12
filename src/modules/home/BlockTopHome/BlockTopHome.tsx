@@ -5,6 +5,7 @@ const BlockTopStyled = styled.div`
 	${mixins.flexCenter}
 	justify-content: space-between;
 	margin-top: 20px;
+	column-gap: 10px;
 `;
 const BannerStyled = styled.div`
 	flex: 1;
