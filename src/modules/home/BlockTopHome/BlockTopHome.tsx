@@ -9,6 +9,7 @@ const BlockTopStyled = styled.div`
 `;
 const BannerStyled = styled.div`
 	flex: 1;
+	align-self: stretch;
 `;
 
 const BlockTopHome = () => {

@@ -23,5 +23,11 @@ const flexAlignCenter = css`
 	display: flex;
 	align-items: center;
 `;
-const mixins = { flexCenter, flexAlignCenter };
+const gridColumns = css`
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 8px;
+`;
+
+const mixins = { flexCenter, flexAlignCenter, gridColumns };
 export { GlobalClasses, ContainerStyled, mixins };

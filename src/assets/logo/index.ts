@@ -11,8 +11,10 @@ import thucu from '~/assets/logo/thucu.png';
 import tivi from '~/assets/logo/tivi.png';
 import watch from '~/assets/logo/watch.png';
 import arrowLeft from '~/assets/logo/arrow-left.png';
+import dienthoaivui from '~/assets/logo/dienthoaivui.png';
 
 const images = {
+	dienthoaivui,
 	arrowLeft,
 	tainghe,
 	hangcu,
