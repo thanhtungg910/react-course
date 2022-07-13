@@ -11,6 +11,7 @@ export interface ButtonProps {
 	href?: string;
 	className?: string;
 	color: string;
+	bgColor?: string;
 	size?: any;
 }
 
@@ -23,6 +24,7 @@ const ButtonStyled = styled.div<any>`
 		align-items: center;
 		justify-content: center;
 		border-radius: 5px;
+		background-color: ${(props) => props.bgColor};
 		&:hover,
 		:active {
 			background-color: ${(props) => props.bgHover || props.theme.hoverBg};
@@ -58,6 +60,7 @@ const Button = ({
 	href,
 	rightIcon,
 	bgHover,
+	bgColor,
 	...passProps
 }: ButtonProps) => {
 	let Comp: string | React.ForwardRefExoticComponent<LinkProps> = 'button';
@@ -70,7 +73,7 @@ const Button = ({
 	}
 
 	return (
-		<ButtonStyled bgHover={bgHover}>
+		<ButtonStyled bgHover={bgHover} bgColor={bgColor}>
 			<Comp {...props}>
 				{icon && typeof icon === 'string' ? (
 					<IconStyled>

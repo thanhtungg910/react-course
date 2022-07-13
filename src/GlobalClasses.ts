@@ -13,6 +13,7 @@ const ContainerStyled = styled.div`
 	margin: 0 auto;
 	display: block;
 	height: 100%;
+	padding: 0 20px;
 `;
 const flexCenter = css`
 	display: flex;
@@ -27,6 +28,9 @@ const gridColumns = css`
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 8px;
+	@media screen and (max-width: 720px) {
+		grid-template-columns: repeat(1, 1fr);
+	}
 `;
 
 const mixins = { flexCenter, flexAlignCenter, gridColumns };
