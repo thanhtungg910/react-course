@@ -20,9 +20,16 @@ const SearchStyled = styled.div`
 		padding: 0 40px;
 	}
 `;
-const SearchInput = () => {
+const SearchInput = ({ className }: { className?: string }) => {
+	let props = {};
+	if (className) {
+		props = {
+			className: className,
+		};
+	}
+
 	return (
-		<SearchStyled>
+		<SearchStyled {...props}>
 			<SearchOutlined />
 			<input type='search' />
 		</SearchStyled>

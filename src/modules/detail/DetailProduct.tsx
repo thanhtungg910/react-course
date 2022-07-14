@@ -1,8 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 import Button from '~/components/Button';
-
-type Props = {};
+import { mixins } from '~/GlobalClasses';
 const BoxDetailProductStyled = styled.div`
 	display: flex;
 	gap: 10px;
@@ -29,7 +27,37 @@ const BoxDetailLeft = styled.div`
 const BoxDetailCenter = styled.div`
 	width: 420px;
 `;
-const BoxDetailRight = styled.div``;
+const BoxDetailRight = styled.div`
+	width: 360px;
+	.title {
+		p {
+			color: #444444;
+			font-weight: 500;
+			font-size: 18px;
+			line-height: 22px;
+		}
+	}
+	.content {
+		margin-top: 10px;
+		table {
+			border: 1px solid #f2f2f2;
+			border-radius: 18px;
+			tr {
+				width: 100%;
+			}
+			tr:nth-child(2n-1) {
+				background-color: #f2f2f2;
+			}
+			th {
+				font-weight: 400;
+				font-size: 14px;
+				line-height: 22px;
+				padding: 10px;
+				word-break: break-word;
+			}
+		}
+	}
+`;
 const BoxInfoStyled = styled.div`
 	display: flex;
 	gap: 10px;
@@ -83,13 +111,13 @@ const BoxOptionsStyled = styled.div`
 		}
 	}
 `;
-const BoxPromotionStyled = styled.div`
+const BoxPromotionStyled = styled.div<any>`
 	border-radius: 5px;
-	border: 1px solid #fee2e2;
+	border: 1px solid ${(props) => props.color};
 	margin-top: 20px;
 	.header {
-		background-color: #fee2e2;
-		color: #d70018;
+		background-color: ${(props) => props.color};
+		color: ${(props) => props.bgHeader};
 		padding: 10px;
 		.title {
 			display: flex;
@@ -129,8 +157,88 @@ const BoxActions = styled.div`
 		margin-top: 10px;
 	}
 `;
+const BoxPromotionMoreStyled = styled(BoxPromotionStyled)`
+	.title {
+		p {
+			color: #444444;
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 22px;
+		}
+	}
+	.content {
+		a {
+			display: flex;
+			font-weight: 400;
+			font-size: 12px;
+			line-height: 22px;
+			color: #444444;
+		}
+	}
+`;
+const specifications = [
+	{ key: 'Kích thước màn hình', value: '6.7 inches' },
+	{ key: 'Công nghệ màn hình', value: 'Super AMOLED' },
+	{
+		key: 'Camera sau',
+		value:
+			'Camera chính: 108 MP, f/1.8, PDAF, OIS Camera chân dung: 5 MP, f/2.4',
+	},
+	{
+		key: 'Camera trước',
+		value: '32 MP, f/2.2',
+	},
+	{
+		key: 'Chipset',
+		value: 'Snapdragon 778G 5G 8 nhân',
+	},
+	{
+		key: 'Dung lượng RAM',
+		value: '8 GB',
+	},
+	{
+		key: 'Bộ nhớ trong',
+		value: '256 GB',
+	},
+	{
+		key: 'Pin',
+		value: '5000 mAh',
+	},
+	{
+		key: 'Thẻ SIM',
+		value: '2 SIM (Nano-SIM)',
+	},
+	{
+		key: ' Hệ điều hành',
+		value: 'Android 12, One UI 4.1 ',
+	},
+	{
+		key: 'Độ phân giải màn hình ',
+		value: '1080 x 2400 pixels (FullHD+)     ',
+	},
+	{
+		key: 'Tính năng màn hình ',
+		value: 'Tần số quét 120 Hz, Kính cường lực Corning Gorilla Glass 5 ',
+	},
+	{
+		key: 'Loại CPU ',
+		value: 'Octa-core (2.4 GHz & 1.8 GHz) ',
+	},
+	{
+		key: 'Trọng lượng ',
+		value: '181 g ',
+	},
+	{
+		key: 'Bluetooth ',
+		value: 'v5.0 ',
+	},
+	{
+		key: ' ',
+		value: ' ',
+	},
+];
 
-const DetailProduct = (props: Props) => {
+const DetailProduct = () => {
 	return (
 		<BoxDetailProductStyled>
 			<BoxDetailLeft>
@@ -189,7 +297,7 @@ const DetailProduct = (props: Props) => {
 						</div>
 					</div>
 				</BoxOptionsStyled>
-				<BoxPromotionStyled>
+				<BoxPromotionStyled color='#fee2e2' bgHeader='#d70018'>
 					<div className='header'>
 						<div className='title'>
 							<svg
@@ -258,9 +366,75 @@ const DetailProduct = (props: Props) => {
 						</Button>
 					</div>
 				</BoxActions>
-				<div className='box-promotion-more'></div>
+				<BoxPromotionMoreStyled color='#D1D5DB' bgHeader='#D1D5DB'>
+					<div className='header'>
+						<div className='title'>
+							<p>Ưu đãi thêm</p>
+						</div>
+					</div>
+					<div className='content'>
+						<ul>
+							<li>
+								<a href='#'>
+									<img
+										width='30'
+										src='https://cdn.cellphones.com.vn/media/wysiwyg/2560px-Citi.svg.png'
+									/>
+									Mở thẻ tín dụng Citibank - Nhận e-voucher tới 2 triệu
+								</a>
+							</li>
+							<li>
+								<a href='#'>
+									<img
+										width='30'
+										src='https://cdn.cellphones.com.vn/media/wysiwyg/photo_2022-06-22_14-38-16.jpg'
+										alt=''
+									/>
+									Nhập mã KVCPS - Giảm thêm 5% (tối đa 250.000đ) khi thanh toán
+									qua Kredivo cho đơn hàng từ 500.000đ
+								</a>
+							</li>
+							<li>
+								<a href='#'>
+									<img
+										width='30'
+										src='https://cdn.cellphones.com.vn/media/wysiwyg/photo_2022-06-22_14-38-16.jpg'
+										alt=''
+									/>
+									Nhập mã MOCACPS - Giảm thêm 5% (tối đa 400.000đ) khi thanh
+									toán qua ví Moca cho đơn hàng từ 500.000đ
+								</a>
+							</li>
+						</ul>
+					</div>
+				</BoxPromotionMoreStyled>
 			</BoxDetailCenter>
-			<BoxDetailRight></BoxDetailRight>
+			<BoxDetailRight>
+				<div className='header'>
+					<div className='title'>
+						<p>Thông số kỹ thuật</p>
+					</div>
+				</div>
+				<div className='content'>
+					<table>
+						<thead>
+							{specifications.length > 0 &&
+								specifications.map((item, index) => (
+									<tr key={index + 1}>
+										<th>{item.key}</th>
+										<th>{item.value}</th>
+									</tr>
+								))}
+						</thead>
+					</table>
+					<Button
+						color='#212529'
+						className='border-spacing-1 border mt-4 border-[#212529] hover:bg-[#f8f9f9]'
+					>
+						Xem chi tiet
+					</Button>
+				</div>
+			</BoxDetailRight>
 		</BoxDetailProductStyled>
 	);
 };

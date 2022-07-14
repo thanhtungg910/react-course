@@ -4,16 +4,16 @@ import Button from '~/components/Button';
 import Card from '~/components/Card';
 import { ContainerStyled, mixins } from '~/GlobalClasses';
 import BlockTopHome from '~/modules/home/BlockTopHome/BlockTopHome';
-const FeaturedProduct = styled.div`
+export const FeaturedProduct = styled.div`
 	margin-top: 20px;
 `;
-const ProductListStyled = styled.div`
+export const ProductListStyled = styled.div`
 	${mixins.flexAlignCenter}
 	gap: 20px;
 	flex-wrap: wrap;
 	margin-top: 10px;
 `;
-const HeaderFeaturedStyled = styled.div`
+export const HeaderFeaturedStyled = styled.div`
 	h2 {
 		font-style: normal;
 		font-weight: 400;
@@ -21,12 +21,12 @@ const HeaderFeaturedStyled = styled.div`
 		line-height: 40px;
 	}
 `;
-const AccessoryStyled = styled(FeaturedProduct)``;
-const HeaderAccessoryStyled = styled(HeaderFeaturedStyled)`
+export const AccessoryStyled = styled(FeaturedProduct)``;
+export const HeaderAccessoryStyled = styled(HeaderFeaturedStyled)`
 	${mixins.flexAlignCenter}
 	justify-content: space-between;
 `;
-const AccessoryList = styled(ProductListStyled)``;
+export const AccessoryList = styled(ProductListStyled)``;
 export const Home = () => {
 	return (
 		<ContainerStyled>
