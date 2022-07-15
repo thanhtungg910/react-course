@@ -1,7 +1,6 @@
 import { HomeOutlined } from '@ant-design/icons';
 import { Breadcrumb as BreadcrumbAntd } from 'antd';
 import { ContainerStyled } from '~/GlobalClasses';
-import 'antd/dist/antd.css';
 import styled from 'styled-components';
 import { memo } from 'react';
 const BreadcrumbStyled = styled.div`

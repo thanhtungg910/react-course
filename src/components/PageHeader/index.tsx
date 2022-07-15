@@ -2,11 +2,12 @@ import { PageHeader as PageHeaderAntd } from 'antd';
 import { memo, ReactNode } from 'react';
 import Button from '../Button';
 export interface Props {
-	title?: ReactNode | string;
-	iconButton: any;
+	title: ReactNode | string;
+	iconButton?: any;
+	href?: string;
 }
 
-const PageHeader = ({ title, iconButton }: Props) => {
+const PageHeader = ({ title, iconButton, href }: Props) => {
 	return (
 		<>
 			<PageHeaderAntd
@@ -14,7 +15,7 @@ const PageHeader = ({ title, iconButton }: Props) => {
 				title={title}
 				extra={[
 					<Button
-						href='product-add'
+						href={href}
 						color='#096dd9'
 						key={1}
 						className='text-base'

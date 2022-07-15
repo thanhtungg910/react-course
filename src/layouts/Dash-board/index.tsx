@@ -4,7 +4,7 @@ import {
 	UserOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Search from '~/components/Search';

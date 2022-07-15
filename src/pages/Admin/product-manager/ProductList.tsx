@@ -30,7 +30,11 @@ const ProductList = () => {
 	];
 	return (
 		<div>
-			<PageHeader title='Điện thoại' iconButton={<PlusOutlined size={30} />} />
+			<PageHeader
+				title='Điện thoại'
+				iconButton={<PlusOutlined size={30} />}
+				href='product-add'
+			/>
 			<Table columns={columns} data={data}></Table>
 		</div>
 	);

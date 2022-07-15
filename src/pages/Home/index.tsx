@@ -27,7 +27,7 @@ export const HeaderAccessoryStyled = styled(HeaderFeaturedStyled)`
 	justify-content: space-between;
 `;
 export const AccessoryList = styled(ProductListStyled)``;
-export const Home = () => {
+const Home = () => {
 	return (
 		<ContainerStyled>
 			<>
@@ -89,3 +89,4 @@ export const Home = () => {
 		</ContainerStyled>
 	);
 };
+export default Home;
