@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { Table as TableAntd, TableProps } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { useState } from 'react';
 interface DataType {
 	key: React.Key;
 	name: string;

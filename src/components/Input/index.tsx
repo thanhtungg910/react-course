@@ -7,7 +7,9 @@ type Props = {
 	type?: string;
 	label: string | ReactNode;
 	className?: string;
-	required: boolean;
+	message?: string;
+	name: string;
+	required?: boolean;
 	size?: SizeInput | SizeType;
 };
 export enum SizeInput {
@@ -23,12 +25,16 @@ const Input = ({
 	size = SizeInput.SMALL,
 	type = 'text',
 	className,
+	message = 'VUi lòng không bỏ trống trường này!',
+	name,
 }: Props) => {
 	const props = {
 		className: className,
 		label,
 		required,
 		tooltip: 'This is a required field',
+		rules: [{ required, message }],
+		name,
 	};
 	if (type === 'number') {
 		return (

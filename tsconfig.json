@@ -22,7 +22,10 @@
 			"~/layouts/*": ["src/layouts/*"],
 			"~/components/*": ["src/components/*"],
 			"~/assets/*": ["src/assets/*"],
-			"~/modules/*": ["src/modules/*"]
+			"~/modules/*": ["src/modules/*"],
+			"~/features/*": ["src/features/*"],
+			"~/api/*": ["src/api/*"],
+			"~/app/*": ["src/app/*"]
 		}
 	},
 	"include": ["src"],

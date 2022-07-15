@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import App from './App';
+import { store } from './app/store';
 import GlobalStyles from './GlobalStyles';
+import 'antd/dist/antd.css';
 import './index.css';
 
 const theme = {
@@ -14,12 +16,14 @@ const theme = {
 };
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<React.StrictMode>
+	<>
 		<ThemeProvider theme={theme}>
-			<BrowserRouter>
-				<GlobalStyles />
-				<App />
-			</BrowserRouter>
+			<Provider store={store}>
+				<BrowserRouter>
+					<GlobalStyles />
+					<App />
+				</BrowserRouter>
+			</Provider>
 		</ThemeProvider>
-	</React.StrictMode>
+	</>
 );

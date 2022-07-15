@@ -13,7 +13,7 @@ export interface ButtonProps {
 	color: string;
 	bgColor?: string;
 	border?: string;
-	size?: any;
+	size?: string;
 }
 
 const ButtonStyled = styled.div<any>`
