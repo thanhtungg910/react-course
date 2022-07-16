@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-
 import { Route, Routes } from 'react-router-dom';
 import DashBoard from './layouts/Dash-board';
 import MainLayout from './layouts/MainLayout';

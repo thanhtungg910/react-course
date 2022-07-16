@@ -34,6 +34,7 @@ const Table = ({ columns, data }: Props) => {
 	};
 	return (
 		<TableAntd
+			rowKey={'id'}
 			columns={columns}
 			dataSource={data}
 			onChange={onChange}
@@ -46,6 +47,7 @@ export default Table;
 export enum Columns {
 	TITLE = 'Tên sản phẩm',
 	PRICE = 'Thành tiền',
+	SALE_OFF_PRICE = 'Giá khuyến mại',
 	DESC = 'Mô tả',
 	ACTIONS = 'Thao tác',
 }

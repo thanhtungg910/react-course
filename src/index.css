@@ -30,10 +30,7 @@ a:hover {
 }
 
 button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-    -webkit-appearance: button;
-    background-color: inherit;
+[type='button'] .ant-switch {
     background-image: none;
+    background-color: none;
 }
