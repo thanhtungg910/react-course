@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { memo } from 'react';
+import { memo, ReactNode } from 'react';
 import { Table as TableAntd, TableProps } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 interface DataType {
@@ -12,11 +12,12 @@ interface DataType {
 type NewType = {
 	columns: ColumnsType<DataType> | any;
 	data: any[];
+	header?: string | any;
 };
 
 type Props = NewType;
 
-const Table = ({ columns, data }: Props) => {
+const Table = ({ columns, data, header }: Props) => {
 	const onChange: TableProps<DataType>['onChange'] = (
 		pagination,
 		filters,
@@ -31,6 +32,7 @@ const Table = ({ columns, data }: Props) => {
 			columns={columns}
 			dataSource={data}
 			onChange={onChange}
+			title={() => header}
 		/>
 	);
 };

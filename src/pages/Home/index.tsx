@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import Accessory from '~/components/Accessory';
 import Button from '~/components/Button';
 import Card from '~/components/Card';
+import { getProducts } from '~/features/products';
+import { productSelector } from '~/features/products/productSelector';
 import { ContainerStyled, mixins } from '~/GlobalClasses';
 import BlockTopHome from '~/modules/home/BlockTopHome/BlockTopHome';
 export const FeaturedProduct = styled.div`
@@ -28,6 +33,15 @@ export const HeaderAccessoryStyled = styled(HeaderFeaturedStyled)`
 `;
 export const AccessoryList = styled(ProductListStyled)``;
 const Home = () => {
+	const dispatch = useAppDispatch();
+	const { products, isLoading, isSuccess } = useAppSelector((state) =>
+		productSelector(state)
+	);
+	console.log({ products, isLoading, isSuccess });
+
+	useEffect(() => {
+		dispatch(getProducts());
+	}, [dispatch]);
 	return (
 		<ContainerStyled>
 			<>

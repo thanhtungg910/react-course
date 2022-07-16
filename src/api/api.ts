@@ -14,3 +14,6 @@ export const setStatusFetchProduct = (data: {
 }) => {
 	return instance.patch('/products/' + data.id, data);
 };
+export const getProducts = () => {
+	return instance.get('/products');
+};

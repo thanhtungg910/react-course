@@ -6,7 +6,7 @@ import {
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
 import React, { memo, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Search from '~/components/Search';
 
 const { Header, Content, Sider } = Layout;
@@ -18,7 +18,7 @@ const items1: MenuProps['items'] = [
 	'Âm thanh',
 ].map((key) => ({
 	key,
-	label: key,
+	label: <Link to='/dash-board/product-manager'>{key}</Link>,
 }));
 
 const items2: MenuProps['items'] = [

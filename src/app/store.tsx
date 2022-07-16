@@ -1,18 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {
-	persistStore,
-	persistReducer,
-	FLUSH,
-	REHYDRATE,
-	PAUSE,
-	PERSIST,
-	PURGE,
-	REGISTER,
-} from 'redux-persist';
+import createSagaMiddleware from '@redux-saga/core';
+import { persistStore, persistReducer } from 'redux-persist';
 
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import { productApi } from '~/api/product.api';
 import rootReducer from './rootReducer';
+import { rootSaga } from './rootSaga';
+const sagaMiddleware = createSagaMiddleware();
 
 const persistConfig = {
 	key: 'root',
@@ -22,14 +16,17 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-	reducer: { persistedReducer, [productApi.reducerPath]: productApi.reducer },
+	reducer: {
+		persistedReducer,
+		[productApi.reducerPath]: productApi.reducer,
+	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: false,
-		}).concat(productApi.middleware),
+		}).concat(productApi.middleware, sagaMiddleware),
 });
 const persistor = persistStore(store);
+sagaMiddleware.run(rootSaga);
 export default persistor;
-
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
