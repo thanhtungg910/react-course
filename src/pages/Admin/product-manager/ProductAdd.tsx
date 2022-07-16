@@ -8,23 +8,24 @@ import Button from '~/components/Button';
 import Input, { SizeInput } from '~/components/Input';
 import PageHeader from '~/components/PageHeader';
 import { mixins } from '~/GlobalClasses';
+import { ProductType } from '~/types/product.type';
 
 const ImageStyled = styled.div`
 	${mixins.flexCenter}
 `;
 const ProductAdd = () => {
-	const [addProduct, { isLoading, isSuccess }] = useAddProductMutation();
+	const [addProduct, { isSuccess }] = useAddProductMutation();
 	if (isSuccess) {
 		message.success('Tạo sản phẩm thành công');
 	}
-	const onFinish = (values: any) => {
+	const onFinish = (values: ProductType) => {
 		addProduct(values);
 	};
 
 	return (
 		<div>
 			<PageHeader title={'Thêm sản phẩm mới'} />
-			<Form onFinish={onFinish} autoComplete='off'>
+			<Form onFinish={onFinish} autoComplete='off' layout='vertical'>
 				<Row gutter={20}>
 					<Col flex={2}>
 						<ImageStyled>
@@ -41,19 +42,18 @@ const ProductAdd = () => {
 							</Form.Item>
 						</div>
 					</Col>
-					<Col flex={3}>
+					<Col flex={3} className='flex-col'>
 						<h2 className='text-xl'>Thông tin sản phẩm</h2>
 						<Divider />
-						<Input
-							placeholder={'Tên sản phẩm'}
-							label={<h2>Tên sản phẩm</h2>}
-							required={true}
-							size={SizeInput.LARGE}
-							message='Please input your username!'
-							className='flex flex-col'
-							name='name'
-						/>
-						<Divider />
+						<div>
+							<Input
+								placeholder={'Tên sản phẩm'}
+								label={<h2>Tên sản phẩm</h2>}
+								required={true}
+								size={SizeInput.LARGE}
+								name='name'
+							/>
+						</div>
 						<div className='flex justify-between gap-4'>
 							<Input
 								placeholder={'Giá gốc'}
@@ -74,32 +74,28 @@ const ProductAdd = () => {
 								className='flex flex-col flex-1'
 							/>
 						</div>
-						<Divider className='border-inherit' />
-						<div>
+						<div className='w-1/2'>
 							<h2>Danh mục</h2>
 							<Form.Item name='category'>
-								<Select className='w-1/2' allowClear size='large'>
+								<Select allowClear size='large'>
 									<Select.Option value='0'>Điện thoại</Select.Option>
 									<Select.Option value='1'>Laptop</Select.Option>
 									<Select.Option value='2'>Phụ kiện</Select.Option>
 								</Select>
 							</Form.Item>
 						</div>
-						<Divider className='border-inherit' />
 						<div>
 							<h2>Đặc điểm nổi bật</h2>
 							<Form.Item name='feature'>
 								<TextArea showCount maxLength={100} style={{ height: 120 }} />
 							</Form.Item>
 						</div>
-						<Divider className='border-inherit' />
 						<div>
 							<h2>Mô tả dài</h2>
 							<Form.Item name='description'>
 								<TextArea showCount maxLength={100} style={{ height: 120 }} />
 							</Form.Item>
 						</div>
-						<Divider className='border-inherit' />
 						<div className='w-1/6 mt-3 p-2'>
 							<Button
 								color='#fff'

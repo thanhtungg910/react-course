@@ -5,4 +5,5 @@ export interface ProductType {
 	saleOffPrice: number;
 	feature: string;
 	description: string;
+	status: boolean;
 }

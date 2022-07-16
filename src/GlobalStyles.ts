@@ -49,6 +49,44 @@ const GlobalStyles = createGlobalStyle`
         object-fit: cover;
     }
     ${GlobalClasses}
+        
+    /* ANTD START */
+    .ant-layout-header,
+    .ant-layout-sider-trigger {
+        background: #096dd9;
+        box-shadow: 0 2px 8px #f0f1f2;
+        color: #fff;
+    }
+
+    .ant-layout-sider {
+        background-color: #fafafa;
+    }
+
+    .site-layout-background {
+        background: #fff;
+    }
+
+    .ant-layout {
+        min-height: 100vh;
+    }
+
+    .ant-form-item-label {
+        text-align: left;
+    } 
+    /* ANTD END */
+    a {
+        color: #333;
+    }
+
+    a:hover {
+        color: #333;
+    } 
+    h2{ 
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px; 
+        color: #5A6169;
+    }
 
 `;
 export default GlobalStyles;

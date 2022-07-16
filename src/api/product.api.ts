@@ -12,13 +12,43 @@ export const productApi = createApi({
 				return {
 					url: '/products',
 					method: 'POST',
+					body: {
+						...data,
+						status: true,
+					},
+				};
+			},
+		}),
+		updateProduct: builder.mutation({
+			query: (data) => {
+				console.log(data);
+
+				return {
+					url: '/products',
+					method: 'PATCH',
 					body: data,
 				};
 			},
 		}),
 		getProducts: builder.query({
-			query: () => 'products',
+			query: () => 'products?_sort=id&_order=desc',
 			keepUnusedDataFor: 5,
+		}),
+		getProduct: builder.query({
+			query: (req: string | undefined) => {
+				return 'products/' + req;
+			},
+		}),
+		setStatusProduct: builder.mutation({
+			query: (data: { id: number | undefined; status: boolean }) => {
+				console.log(data);
+
+				return {
+					url: '/products/' + data.id,
+					method: 'PATCH',
+					body: data,
+				};
+			},
 		}),
 	}),
 });
@@ -27,4 +57,9 @@ export const {
 	reducerPath,
 	useLazyGetProductsQuery,
 	useGetProductsQuery,
+	useGetProductQuery,
+	useLazyGetProductQuery,
+	usePrefetch,
+	useUpdateProductMutation,
+	useSetStatusProductMutation,
 } = productApi;

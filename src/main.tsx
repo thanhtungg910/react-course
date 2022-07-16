@@ -6,9 +6,9 @@ import { ThemeProvider } from 'styled-components';
 
 import App from './App';
 import { store } from './app/store';
-import GlobalStyles from './GlobalStyles';
-import 'antd/dist/antd.css';
 import './index.css';
+import 'antd/dist/antd.css';
+import GlobalStyles from './GlobalStyles';
 
 const theme = {
 	primary: '#D70018',

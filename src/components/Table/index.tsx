@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { memo } from 'react';
 import { Table as TableAntd, TableProps } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 interface DataType {
@@ -8,14 +9,14 @@ interface DataType {
 	desc: string;
 	status: string;
 }
-type Props = {
-	columns: ColumnsType<DataType>;
+type NewType = {
+	columns: ColumnsType<DataType> | any;
 	data: any[];
 };
 
-const Table = ({ columns, data }: Props) => {
-	const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+type Props = NewType;
 
+const Table = ({ columns, data }: Props) => {
 	const onChange: TableProps<DataType>['onChange'] = (
 		pagination,
 		filters,
@@ -24,25 +25,16 @@ const Table = ({ columns, data }: Props) => {
 	) => {
 		console.log('params', pagination, filters, sorter, extra);
 	};
-	const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-		console.log('selectedRowKeys changed: ', selectedRowKeys);
-		setSelectedRowKeys(newSelectedRowKeys);
-	};
-	const rowSelection = {
-		selectedRowKeys,
-		onChange: onSelectChange,
-	};
 	return (
 		<TableAntd
 			rowKey={'id'}
 			columns={columns}
 			dataSource={data}
 			onChange={onChange}
-			rowSelection={rowSelection}
 		/>
 	);
 };
-export default Table;
+export default memo(Table);
 
 export enum Columns {
 	TITLE = 'Tên sản phẩm',

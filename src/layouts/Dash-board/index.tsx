@@ -5,7 +5,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Search from '~/components/Search';
 
@@ -44,6 +44,7 @@ const items2: MenuProps['items'] = [
 });
 const DashBoard = () => {
 	const [collapsed, setCollapsed] = useState(false);
+
 	return (
 		<>
 			<Layout>
@@ -85,4 +86,4 @@ const DashBoard = () => {
 	);
 };
 
-export default DashBoard;
+export default memo(DashBoard);

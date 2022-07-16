@@ -3,6 +3,9 @@ import { Route } from './routes.type';
 const ProductAddLazy = lazy(
 	() => import('~/pages/Admin/product-manager/ProductAdd')
 );
+const ProductEditLazy = lazy(
+	() => import('~/pages/Admin/product-manager/ProductEdit')
+);
 const ProductListLazy = lazy(
 	() => import('~/pages/Admin/product-manager/ProductList')
 );
@@ -23,6 +26,11 @@ const privateRoutes: Route[] = [
 		path: 'product-manager/product-add',
 		name: 'product-add',
 		component: ProductAddLazy,
+	},
+	{
+		path: 'product-manager/product-edit/:id',
+		name: 'product-edit',
+		component: ProductEditLazy,
 	},
 ];
 export { publicRoutes, privateRoutes };

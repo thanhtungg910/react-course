@@ -25,7 +25,7 @@ const Input = ({
 	size = SizeInput.SMALL,
 	type = 'text',
 	className,
-	message = 'VUi lòng không bỏ trống trường này!',
+	message = 'Vui lòng không bỏ trống trường này!',
 	name,
 }: Props) => {
 	const props = {
