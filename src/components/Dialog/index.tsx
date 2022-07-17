@@ -5,10 +5,10 @@ export interface Props {
 	title: React.ReactNode;
 	visible: boolean;
 	confirmLoading?: boolean;
-	handleOk:
+	handleOk?:
 		| ((e: React.MouseEvent<HTMLElement, MouseEvent>) => void)
 		| undefined;
-	handleCancel:
+	handleCancel?:
 		| ((e: React.MouseEvent<HTMLElement, MouseEvent>) => void)
 		| undefined;
 	children: ReactNode;

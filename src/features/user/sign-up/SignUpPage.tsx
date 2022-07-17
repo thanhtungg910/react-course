@@ -1,7 +1,9 @@
 import { Checkbox, Form, Input, Typography } from 'antd';
 import { useState } from 'react';
+import { useAppDispatch } from '~/app/hooks';
 import Button from '~/components/Button';
 import Dialog from '~/components/Dialog';
+import { signUp } from '../userSlice';
 
 const { Title } = Typography;
 type Props = {
@@ -10,21 +12,17 @@ type Props = {
 };
 
 const SignUpPage = ({ show, setShow }: Props) => {
-	const [confirmLoading, setConfirmLoading] = useState(false);
+	const dispatch = useAppDispatch();
 
 	const handleOk = () => {
 		setShow(false);
-		onFinish();
 	};
 
 	const handleCancel = () => {
 		setShow(false);
 	};
 	const onFinish = (values?: any) => {
-		console.log('Success:', values);
-		setTimeout(() => {
-			setConfirmLoading(false);
-		}, 2000);
+		dispatch(signUp(values));
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -36,7 +34,6 @@ const SignUpPage = ({ show, setShow }: Props) => {
 			visible={show}
 			handleOk={handleOk}
 			handleCancel={handleCancel}
-			confirmLoading={confirmLoading}
 		>
 			<Form
 				layout='vertical'
@@ -52,6 +49,9 @@ const SignUpPage = ({ show, setShow }: Props) => {
 					name='username'
 					rules={[{ required: true, message: 'Please input your username!' }]}
 				>
+					<Input />
+				</Form.Item>
+				<Form.Item label='Phone' name='phone'>
 					<Input />
 				</Form.Item>
 
@@ -71,10 +71,6 @@ const SignUpPage = ({ show, setShow }: Props) => {
 					<Input.Password />
 				</Form.Item>
 
-				<Form.Item name='remember' valuePropName='checked'>
-					<Checkbox>Remember me</Checkbox>
-				</Form.Item>
-
 				<Button
 					color={'#fff'}
 					bgColor='#D70018'
@@ -82,17 +78,7 @@ const SignUpPage = ({ show, setShow }: Props) => {
 					size='16px'
 					padding='0.8em'
 				>
-					Đăng nhập
-				</Button>
-				<Button
-					color={'#fff'}
-					bgColor='#0050b3'
-					bgHover='#0050b3'
-					size='16px'
-					className=' my-4'
-					padding='0.8em'
-				>
-					Đăng nhập với tài khoản Google
+					Đăng kí
 				</Button>
 			</Form>
 		</Dialog>

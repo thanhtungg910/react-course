@@ -1,30 +1,28 @@
 import { Checkbox, Form, Input, Typography } from 'antd';
-import { useState } from 'react';
+import { useAppDispatch } from '~/app/hooks';
 import Button from '~/components/Button';
 import Dialog from '~/components/Dialog';
+import { User } from '~/types/user';
+import { login } from '../userSlice';
 
 const { Text, Title } = Typography;
 type Props = {
 	show: boolean;
 	setShow: any;
+	onClick: () => void;
 };
 
-const SignInPage = ({ show, setShow }: Props) => {
-	const [confirmLoading, setConfirmLoading] = useState(false);
+const SignInPage = ({ show, setShow, onClick }: Props) => {
+	const dispatch = useAppDispatch();
 
 	const handleOk = () => {
 		setShow(false);
-		onFinish();
 	};
-
 	const handleCancel = () => {
 		setShow(false);
 	};
-	const onFinish = (values?: any) => {
-		console.log('Success:', values);
-		setTimeout(() => {
-			setConfirmLoading(false);
-		}, 2000);
+	const onFinish = (values: User) => {
+		dispatch(login(values));
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -36,7 +34,6 @@ const SignInPage = ({ show, setShow }: Props) => {
 			visible={show}
 			handleOk={handleOk}
 			handleCancel={handleCancel}
-			confirmLoading={confirmLoading}
 		>
 			<Form
 				layout='vertical'
@@ -87,7 +84,7 @@ const SignInPage = ({ show, setShow }: Props) => {
 					Đăng nhập với tài khoản Google
 				</Button>
 				<Text>Bạn chưa có tài khoản? </Text>
-				<Text strong className='cursor-pointer'>
+				<Text strong className='cursor-pointer' onClick={onClick}>
 					Đăng kí
 				</Text>
 			</Form>
