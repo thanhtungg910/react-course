@@ -12,15 +12,17 @@ export interface ButtonProps {
 	className?: string;
 	color: string;
 	bgColor?: string;
+	padding?: string;
 	border?: string;
 	size?: string;
+	onClick?: () => void;
 }
 
 const ButtonStyled = styled.div<any>`
 	button,
 	a {
 		width: 100%;
-		padding: 5px 5px;
+		padding: ${(props) => props.padding || '5px'};
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -63,10 +65,13 @@ const Button = ({
 	bgHover,
 	bgColor,
 	border,
+	padding,
+	onClick,
 	...passProps
 }: ButtonProps) => {
 	let Comp: string | React.ForwardRefExoticComponent<LinkProps> = 'button';
 	const props: any = {
+		onClick,
 		...passProps,
 	};
 	if (href) {
@@ -75,7 +80,12 @@ const Button = ({
 	}
 
 	return (
-		<ButtonStyled bgHover={bgHover} bgColor={bgColor} border={border}>
+		<ButtonStyled
+			padding={padding}
+			bgHover={bgHover}
+			bgColor={bgColor}
+			border={border}
+		>
 			<Comp {...props}>
 				{icon && typeof icon === 'string' ? (
 					<IconStyled>
