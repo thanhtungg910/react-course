@@ -4,6 +4,9 @@ import {
 	ShoppingOutlined,
 	UserOutlined,
 } from '@ant-design/icons';
+import { Menu } from 'antd';
+import { useEffect, useState } from 'react';
+
 import { ContainerStyled } from '~/GlobalClasses';
 import logos from '~/assets/logo/logos.png';
 import {
@@ -15,15 +18,52 @@ import {
 import tracing from '~/assets/logo/tracking.svg';
 import Button from '~/components/Button';
 import SearchInput from '~/components/Search';
-import { useEffect, useState } from 'react';
 import SignInPage from '~/features/user/sign-in/SignInPage';
 import SignUpPage from '~/features/user/sign-up/SignUpPage';
 import { useAppSelector } from '~/app/hooks';
 import userSelector from '~/features/user/userSelector';
+import Dropdown from '~/components/Dropdown';
+import SignOut from '~/features/user/sign-out';
 export enum Tab {
 	SIGN_IN = 1,
 	SIGN_UP = 2,
 }
+
+const menu = (
+	<Menu
+		items={[
+			{
+				key: '1',
+				label: (
+					<a
+						target='_blank'
+						rel='noopener noreferrer'
+						href='https://www.antgroup.com'
+					>
+						Đơn hàng của tôi
+					</a>
+				),
+			},
+			{
+				key: '2',
+				label: (
+					<a
+						target='_blank'
+						rel='noopener noreferrer'
+						href='https://www.aliyun.com'
+					>
+						Quản lí tài khoản
+					</a>
+				),
+			},
+			{
+				key: '3',
+				label: <SignOut>Đăng xuất</SignOut>,
+			},
+		]}
+	/>
+);
+
 const Navbar = () => {
 	const [dialog, setDialog] = useState(Tab.SIGN_IN);
 	const [isModalVisible, setIsModalVisible] = useState(false);
@@ -93,7 +133,15 @@ const Navbar = () => {
 							>
 								Giỏ <br /> hàng
 							</Button>
-							{user?.user?.email || (
+							{(user.isLogin && (
+								<Dropdown
+									overlay={menu}
+									placement='bottomRight'
+									trigger={['click']}
+								>
+									<Button color={'#fff'}>{user?.user?.email}</Button>
+								</Dropdown>
+							)) || (
 								<Button
 									color='white'
 									icon={<UserOutlined style={{ fontSize: '26px' }} />}

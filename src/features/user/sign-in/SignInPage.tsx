@@ -1,9 +1,19 @@
-import { Checkbox, Form, Input, Typography } from 'antd';
+import { Alert, Checkbox, Form, Input, Typography } from 'antd';
+import {
+	getAuth,
+	signInWithPopup,
+	GoogleAuthProvider,
+	UserCredential,
+	UserInfo,
+} from 'firebase/auth';
+import { memo } from 'react';
+
 import { useAppDispatch } from '~/app/hooks';
 import Button from '~/components/Button';
 import Dialog from '~/components/Dialog';
+import { provider } from '~/configs/firebase';
 import { User } from '~/types/user';
-import { login } from '../userSlice';
+import { login, loginWithGoogle } from '../userSlice';
 
 const { Text, Title } = Typography;
 type Props = {
@@ -12,15 +22,10 @@ type Props = {
 	onClick: () => void;
 };
 
-const SignInPage = ({ show, setShow, onClick }: Props) => {
+const SignInPage = ({ show, onClick }: Props) => {
 	const dispatch = useAppDispatch();
+	const auth = getAuth();
 
-	const handleOk = () => {
-		setShow(false);
-	};
-	const handleCancel = () => {
-		setShow(false);
-	};
 	const onFinish = (values: User) => {
 		dispatch(login(values));
 	};
@@ -28,13 +33,29 @@ const SignInPage = ({ show, setShow, onClick }: Props) => {
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo);
 	};
+	const handleLoginWithFirebase = () => {
+		signInWithPopup(auth, provider)
+			.then((result: UserCredential) => {
+				const credential = GoogleAuthProvider.credentialFromResult(result);
+				const token = credential?.accessToken;
+				const user: UserInfo = result.user;
+				const payload = {
+					email: user?.email,
+					id: user?.uid,
+				};
+				dispatch(loginWithGoogle(payload));
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				const email = error.customData.email;
+				const credential = GoogleAuthProvider.credentialFromError(error);
+			});
+	};
+
 	return (
-		<Dialog
-			title={<Title level={4}>Đăng nhập</Title>}
-			visible={show}
-			handleOk={handleOk}
-			handleCancel={handleCancel}
-		>
+		<Dialog title={<Title level={4}>Đăng nhập</Title>} visible={show}>
+			<Alert message='Error' type='error' showIcon />
 			<Form
 				layout='vertical'
 				labelCol={{ span: 8 }}
@@ -73,16 +94,12 @@ const SignInPage = ({ show, setShow, onClick }: Props) => {
 				>
 					Đăng nhập
 				</Button>
-				<Button
-					color={'#fff'}
-					bgColor='#0050b3'
-					bgHover='#0050b3'
-					size='16px'
-					className=' my-4'
-					padding='0.8em'
+				<div
+					className='bg-[#0050b3] p-3 w-full rounded-md my-4 text-white text-center cursor-pointer focus:shadow'
+					onClick={handleLoginWithFirebase}
 				>
 					Đăng nhập với tài khoản Google
-				</Button>
+				</div>
 				<Text>Bạn chưa có tài khoản? </Text>
 				<Text strong className='cursor-pointer' onClick={onClick}>
 					Đăng kí
@@ -92,4 +109,4 @@ const SignInPage = ({ show, setShow, onClick }: Props) => {
 	);
 };
 
-export default SignInPage;
+export default memo(SignInPage);

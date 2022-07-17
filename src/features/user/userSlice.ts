@@ -9,6 +9,14 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		login: (state, payload) => {},
+		loginWithGoogle: (state, { payload }) => {
+			return {
+				isLogin: true,
+				user: {
+					...payload,
+				},
+			};
+		},
 		loginSuccess: (state, { payload }) => {
 			return {
 				isLogin: true,
@@ -18,7 +26,9 @@ export const userSlice = createSlice({
 			};
 		},
 		signUp: (state, payload) => {},
+		signOut: () => initialState,
 	},
 });
-export const { login, loginSuccess, signUp } = userSlice.actions;
+export const { login, loginSuccess, signUp, loginWithGoogle, signOut } =
+	userSlice.actions;
 export default userSlice.reducer;
