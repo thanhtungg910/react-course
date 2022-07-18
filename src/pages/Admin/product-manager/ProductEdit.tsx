@@ -3,6 +3,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import { memo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { useGetCategoriesQuery } from '~/api/category.api';
 
 import {
 	useGetProductQuery,
@@ -14,6 +15,7 @@ import Image from '~/components/Image';
 import Input, { SizeInput } from '~/components/Input';
 import PageHeader from '~/components/PageHeader';
 import { mixins } from '~/GlobalClasses';
+import { Category } from '~/types/category.type';
 import { ProductType } from '~/types/product.type';
 import { checkImage } from '~/utils/helper';
 
@@ -29,19 +31,25 @@ const ProductEdit = () => {
 	const { isSuccess, data } = useGetProductQuery(id);
 	const [updateProduct, { isError, isSuccess: isSuccessUpdate }] =
 		useUpdateProductMutation();
+	const {
+		isError: isErrorCategory,
+		isSuccess: isSuccessCategory,
+		data: dataCategory,
+	} = useGetCategoriesQuery('Categories');
+
 	if (isSuccessUpdate) {
-		navigate('/dash-board/product-manage');
+		navigate('/dash-board/product-manager');
 	}
 	if (isError) {
 		message.error('Không thể cập nhật');
-		navigate('/dash-board/product-manage');
+		navigate('/dash-board/product-manager');
 	}
 	const onFinish = async (values: ProductType) => {
-		if (!base64Image) {
-			return;
+		let img: string = data.img;
+		if (base64Image) {
+			await message.loading('Loading...');
+			img = await uploadImage(base64Image);
 		}
-		await message.loading('Loading...');
-		const img = await uploadImage(base64Image);
 		const payload = {
 			...values,
 			img,
@@ -136,9 +144,12 @@ const ProductEdit = () => {
 								<h2>Danh mục</h2>
 								<Form.Item name='category'>
 									<Select allowClear size='large'>
-										<Select.Option value='0'>Điện thoại</Select.Option>
-										<Select.Option value='1'>Laptop</Select.Option>
-										<Select.Option value='2'>Phụ kiện</Select.Option>
+										{isSuccessCategory &&
+											dataCategory.map((item: Category) => (
+												<Select.Option key={item.id} value={item.id}>
+													{item.name}
+												</Select.Option>
+											))}
 									</Select>
 								</Form.Item>
 							</div>

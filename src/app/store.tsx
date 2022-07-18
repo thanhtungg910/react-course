@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage for
 import { productApi } from '~/api/product.api';
 import rootReducer from './rootReducer';
 import { rootSaga } from './rootSaga';
+import { categoryApi } from '~/api/category.api';
 const sagaMiddleware = createSagaMiddleware();
 
 const persistConfig = {
@@ -19,11 +20,12 @@ export const store = configureStore({
 	reducer: {
 		persistedReducer,
 		[productApi.reducerPath]: productApi.reducer,
+		[categoryApi.reducerPath]: categoryApi.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: false,
-		}).concat(productApi.middleware, sagaMiddleware),
+		}).concat(productApi.middleware, categoryApi.middleware, sagaMiddleware),
 });
 const persistor = persistStore(store);
 sagaMiddleware.run(rootSaga);

@@ -39,12 +39,22 @@ export const productApi = createApi({
 		}),
 		setStatusProduct: builder.mutation({
 			query: (data: { id: number | undefined; status: boolean }) => {
-				console.log(data);
-
 				return {
 					url: '/products/' + data.id,
 					method: 'PATCH',
 					body: data,
+				};
+			},
+		}),
+		getByIdCategory: builder.mutation({
+			query: (id?: string | number) => {
+				let url = 'products?_sort=id&_order=desc';
+				if (id) {
+					url = 'products?_sort=id&_order=desc&categoryId=' + id;
+				}
+				return {
+					url,
+					method: 'GET',
 				};
 			},
 		}),
@@ -60,4 +70,5 @@ export const {
 	usePrefetch,
 	useUpdateProductMutation,
 	useSetStatusProductMutation,
+	useGetByIdCategoryMutation,
 } = productApi;

@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PlusOutlined, EditOutlined } from '@ant-design/icons';
 import { Select, Space, Switch } from 'antd';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setStatusFetchProduct } from '~/api/api';
-import { useGetProductsQuery } from '~/api/product.api';
+import { useGetCategoriesQuery } from '~/api/category.api';
+import { useGetByIdCategoryMutation } from '~/api/product.api';
 import PageHeader from '~/components/PageHeader';
 import Table, { Columns } from '~/components/Table';
+import { Category } from '~/types/category.type';
 import { ProductType } from '~/types/product.type';
 
 const columns = [
@@ -60,12 +62,25 @@ const columns = [
 	},
 ];
 const ProductList = () => {
-	const { isError, isSuccess, data } = useGetProductsQuery('Products');
-	if (isError) {
+	const [filterData, { isError, isSuccess, data }] =
+		useGetByIdCategoryMutation<any>();
+
+	const {
+		isError: isErrorCategory,
+		isSuccess: isSuccessCategory,
+		data: dataCategory,
+	} = useGetCategoriesQuery('Categories');
+
+	if (isError || isErrorCategory) {
 		return <h1>Error</h1>;
 	}
+
+	useEffect(() => {
+		filterData();
+	}, []);
+
 	const handlerOnChange = useCallback((e: string) => {
-		console.log(e);
+		filterData(e);
 	}, []);
 	return (
 		<div>
@@ -79,14 +94,17 @@ const ProductList = () => {
 				<Space direction='vertical'>
 					<h2>Danh mục sản phẩm </h2>
 					<Select
-						defaultValue='lucy'
+						defaultValue={'Tất cả'}
 						style={{ width: 200 }}
 						allowClear
 						onChange={handlerOnChange}
 					>
-						<Select.Option value='lucy'>Lucy</Select.Option>
-						<Select.Option value='jack'>jack</Select.Option>
-						<Select.Option value='disabled'>disabled</Select.Option>
+						{isSuccessCategory &&
+							dataCategory.map((item: Category) => (
+								<Select.Option key={item.id} value={item.id}>
+									{item.name}
+								</Select.Option>
+							))}
 					</Select>
 				</Space>
 			</div>

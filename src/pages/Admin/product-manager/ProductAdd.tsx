@@ -3,6 +3,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import { memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useGetCategoriesQuery } from '~/api/category.api';
 import { useAddProductMutation } from '~/api/product.api';
 import uploadImg from '~/api/upload-img.api';
 
@@ -11,6 +12,7 @@ import Image from '~/components/Image';
 import Input, { SizeInput } from '~/components/Input';
 import PageHeader from '~/components/PageHeader';
 import { mixins } from '~/GlobalClasses';
+import { Category } from '~/types/category.type';
 import { ProductType } from '~/types/product.type';
 import { checkImage } from '~/utils/helper';
 
@@ -22,6 +24,11 @@ const ProductAdd = () => {
 	const [base64Image, setBase64Image] = useState<string | ArrayBuffer | null>();
 	const [imgPreview, setImgPreview] = useState('');
 	const navigate = useNavigate();
+	const {
+		isError: isErrorCategory,
+		isSuccess: isSuccessCategory,
+		data: dataCategory,
+	} = useGetCategoriesQuery('Categories');
 
 	const uploadImage = async (base64Image: string | ArrayBuffer | null) => {
 		try {
@@ -116,9 +123,12 @@ const ProductAdd = () => {
 							<h2>Danh mục</h2>
 							<Form.Item name='category'>
 								<Select allowClear size='large'>
-									<Select.Option value='0'>Điện thoại</Select.Option>
-									<Select.Option value='1'>Laptop</Select.Option>
-									<Select.Option value='2'>Phụ kiện</Select.Option>
+									{isSuccessCategory &&
+										dataCategory.map((item: Category) => (
+											<Select.Option key={item.id} value={item.id}>
+												{item.name}
+											</Select.Option>
+										))}
 								</Select>
 							</Form.Item>
 						</div>

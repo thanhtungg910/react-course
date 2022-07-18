@@ -49,7 +49,7 @@
       "name": "asdsad",
       "originalPrice": 123,
       "saleOffPrice": 123123,
-      "category": "1",
+      "categoryId": "1",
       "feature": "123123",
       "description": "123123",
       "status": false,
@@ -60,12 +60,24 @@
       "name": "1",
       "originalPrice": 324324,
       "saleOffPrice": 234324324,
-      "category": "1",
+      "categoryId": "1",
       "feature": "234324",
       "description": "234324",
       "img": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658126527/anhhtus/sjv4su3zjwyobfimnssl.jpg",
-      "status": false,
+      "status": true,
       "id": 6
+    },
+    {
+      "desc_short": "1",
+      "name": "May tinh bang ",
+      "originalPrice": 1111111,
+      "saleOffPrice": 1,
+      "category": 3,
+      "feature": "1",
+      "description": "1",
+      "img": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658129885/anhhtus/dqukjwxar4pjrn8r3rai.jpg",
+      "status": true,
+      "id": 7
     }
   ],
   "categories": [
