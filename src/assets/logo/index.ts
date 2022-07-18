@@ -12,8 +12,10 @@ import tivi from '~/assets/logo/tivi.png';
 import watch from '~/assets/logo/watch.png';
 import arrowLeft from '~/assets/logo/arrow-left.png';
 import dienthoaivui from '~/assets/logo/dienthoaivui.png';
+import logo from '~/assets/logo/logos.png';
 
 const images = {
+	logo,
 	dienthoaivui,
 	arrowLeft,
 	tainghe,

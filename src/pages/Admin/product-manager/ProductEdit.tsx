@@ -1,45 +1,96 @@
-import { Col, Divider, Form, Image, message, Row, Select, Space } from 'antd';
+import { Col, Divider, Form, message, Row, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import { memo } from 'react';
-import { useParams } from 'react-router-dom';
+import { memo, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { useGetProductQuery } from '~/api/product.api';
 
+import {
+	useGetProductQuery,
+	useUpdateProductMutation,
+} from '~/api/product.api';
+import uploadImg from '~/api/upload-img.api';
 import Button from '~/components/Button';
+import Image from '~/components/Image';
 import Input, { SizeInput } from '~/components/Input';
 import PageHeader from '~/components/PageHeader';
 import { mixins } from '~/GlobalClasses';
 import { ProductType } from '~/types/product.type';
+import { checkImage } from '~/utils/helper';
 
 const ImageStyled = styled.div`
 	${mixins.flexCenter}
 `;
 const ProductEdit = () => {
 	const { id } = useParams();
+	const [base64Image, setBase64Image] = useState<string | ArrayBuffer | null>();
+	const [imgPreview, setImgPreview] = useState('');
+	const navigate = useNavigate();
 
 	const { isSuccess, data } = useGetProductQuery(id);
-	if (isSuccess) {
-		// message.success('Tạo sản phẩm thành công');
-		console.log(data);
+	const [updateProduct, { isError, isSuccess: isSuccessUpdate }] =
+		useUpdateProductMutation();
+	if (isSuccessUpdate) {
+		navigate('/dash-board/product-manage');
 	}
-	const onFinish = (values: ProductType) => {
-		console.log(values);
+	if (isError) {
+		message.error('Không thể cập nhật');
+		navigate('/dash-board/product-manage');
+	}
+	const onFinish = async (values: ProductType) => {
+		if (!base64Image) {
+			return;
+		}
+		await message.loading('Loading...');
+		const img = await uploadImage(base64Image);
+		const payload = {
+			...values,
+			img,
+			id: data.id,
+		};
+		updateProduct(payload);
+	};
+	const handlerOnChange = (event: any) => {
+		const file = event?.target.files[0];
+		if (!checkImage(file, message)) {
+			return;
+		}
 
-		// addProduct(values);
+		file.preview = URL.createObjectURL(file);
+		setImgPreview(file.preview);
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend = () => {
+			setBase64Image(reader?.result);
+		};
+	};
+	const uploadImage = async (base64Image: string | ArrayBuffer | null) => {
+		try {
+			const { data } = await uploadImg(base64Image);
+			return data.url;
+		} catch (err) {
+			console.log(err);
+			message.error('upload image fail');
+			return;
+		}
 	};
 
 	return (
 		<div>
 			<PageHeader title={'Cập nhât sản phẩm'} />
 			{isSuccess && (
-				<Form onFinish={onFinish} autoComplete='off' layout='vertical'>
+				<Form
+					onFinish={onFinish}
+					autoComplete='off'
+					layout='vertical'
+					initialValues={data}
+				>
 					<Row gutter={20}>
 						<Col flex={2}>
 							<ImageStyled>
 								<Image
-									width={200}
-									preview={false}
-									src='https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+									onChange={handlerOnChange}
+									imgPreview={imgPreview}
+									img={data.img}
 								/>
 							</ImageStyled>
 							<div className='short-desc'>
@@ -106,11 +157,11 @@ const ProductEdit = () => {
 							<div className='w-1/6 mt-3 p-2'>
 								<Button
 									color='#fff'
-									bgColor='#096dd9'
-									bgHover='#096dd9'
+									bgColor='#00B0D7'
+									bgHover='#00B0D7'
 									size={'18px'}
 								>
-									Thêm mới
+									Cập nhật
 								</Button>
 							</div>
 						</Col>

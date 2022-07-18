@@ -2,6 +2,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import axios from 'axios';
 export const baseUrl: string | undefined = 'http://localhost:3001';
+export const API_UPLOAD = import.meta.env.VITE_API_UPLOAD;
 export const instance = axios.create({
 	baseURL: baseUrl,
 	headers: {

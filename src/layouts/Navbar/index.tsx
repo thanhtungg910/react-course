@@ -29,7 +29,7 @@ export enum Tab {
 	SIGN_UP = 2,
 }
 
-const menu = (
+export const menu = (
 	<Menu
 		items={[
 			{

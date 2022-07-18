@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "admin@gmail.com",
-      "password": "$2a$10$DAF/ECkklTGrZv.gKrgGn.jn18.aFWz3mvfQorngq/MxbZZwY1pMa",
+      "password": "$2a$10$EaFjyxq6RF9TK3gvnXiaze3AIbBj4VU1hcxvgBJ6EFdRN.ToDrSH2",
       "remember": true,
       "id": 1
     }
@@ -52,8 +52,20 @@
       "category": "1",
       "feature": "123123",
       "description": "123123",
-      "status": true,
+      "status": false,
       "id": 5
+    },
+    {
+      "desc_short": "234324324",
+      "name": "1",
+      "originalPrice": 324324,
+      "saleOffPrice": 234324324,
+      "category": "1",
+      "feature": "234324",
+      "description": "234324",
+      "img": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658126527/anhhtus/sjv4su3zjwyobfimnssl.jpg",
+      "status": false,
+      "id": 6
     }
   ],
   "categories": [

@@ -21,10 +21,8 @@ export const productApi = createApi({
 		}),
 		updateProduct: builder.mutation({
 			query: (data) => {
-				console.log(data);
-
 				return {
-					url: '/products',
+					url: '/products/' + data.id,
 					method: 'PATCH',
 					body: data,
 				};

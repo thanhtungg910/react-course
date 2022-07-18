@@ -1,25 +1,67 @@
-import { Col, Divider, Form, Image, message, Row, Select } from 'antd';
+import { Col, Divider, Form, message, Row, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import { memo } from 'react';
+import { memo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAddProductMutation } from '~/api/product.api';
+import uploadImg from '~/api/upload-img.api';
 
 import Button from '~/components/Button';
+import Image from '~/components/Image';
 import Input, { SizeInput } from '~/components/Input';
 import PageHeader from '~/components/PageHeader';
 import { mixins } from '~/GlobalClasses';
 import { ProductType } from '~/types/product.type';
+import { checkImage } from '~/utils/helper';
 
 const ImageStyled = styled.div`
 	${mixins.flexCenter}
 `;
 const ProductAdd = () => {
 	const [addProduct, { isSuccess }] = useAddProductMutation();
+	const [base64Image, setBase64Image] = useState<string | ArrayBuffer | null>();
+	const [imgPreview, setImgPreview] = useState('');
+	const navigate = useNavigate();
+
+	const uploadImage = async (base64Image: string | ArrayBuffer | null) => {
+		try {
+			const { data } = await uploadImg(base64Image);
+			return data.url;
+		} catch (err) {
+			console.log(err);
+			return message.error('upload image fail');
+		}
+	};
+
 	if (isSuccess) {
 		message.success('Tạo sản phẩm thành công');
+		navigate('/dash-board/product-manager');
 	}
-	const onFinish = (values: ProductType) => {
-		addProduct(values);
+	const onFinish = async (values: ProductType) => {
+		if (!base64Image) {
+			return;
+		}
+		await message.loading('Loading...');
+		const img = await uploadImage(base64Image);
+		const payload = {
+			...values,
+			img,
+		};
+		addProduct(payload);
+	};
+	const handlerOnChange = (event: any) => {
+		const file = event?.target.files[0];
+		if (!checkImage(file, message)) {
+			return;
+		}
+
+		file.preview = URL.createObjectURL(file);
+		setImgPreview(file.preview);
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend = () => {
+			setBase64Image(reader?.result);
+		};
 	};
 
 	return (
@@ -29,11 +71,7 @@ const ProductAdd = () => {
 				<Row gutter={20}>
 					<Col flex={2}>
 						<ImageStyled>
-							<Image
-								width={200}
-								preview={false}
-								src='https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-							/>
+							<Image onChange={handlerOnChange} imgPreview={imgPreview} />
 						</ImageStyled>
 						<div className='short-desc'>
 							<h2>Mô tả ngắn</h2>
@@ -99,8 +137,8 @@ const ProductAdd = () => {
 						<div className='w-1/6 mt-3 p-2'>
 							<Button
 								color='#fff'
-								bgColor='#096dd9'
-								bgHover='#096dd9'
+								bgColor='#00B0D7'
+								bgHover='#00B0D7'
 								size={'18px'}
 							>
 								Thêm mới

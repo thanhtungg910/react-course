@@ -53,7 +53,7 @@ const GlobalStyles = createGlobalStyle`
     /* ANTD START */
     .ant-layout-header,
     .ant-layout-sider-trigger {
-        background: #096dd9;
+        background: #00B0D7;
         box-shadow: 0 2px 8px #f0f1f2;
         color: #fff;
     }
