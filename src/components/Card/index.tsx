@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const CardWrapper = styled.div`
@@ -11,12 +12,12 @@ const CardWrapper = styled.div`
 `;
 const CardInnerStyled = styled.div`
 	width: 250px;
-`;
-const ImageBoxStyled = styled.a`
-	width: 160px;
-	img {
-		margin-left: auto;
-		margin-right: auto;
+	.img-box {
+		width: 160px;
+		img {
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
 `;
 const CardTitleStyed = styled.h2`
@@ -71,21 +72,37 @@ const PromotionsStyled = styled.div`
 		}
 	}
 `;
-const Card = () => {
+export interface Props {
+	img: string;
+	title: string;
+	originalPrice: number;
+	saleOffPrice: number;
+	id: number | string;
+}
+const Card = ({ img, title, originalPrice, saleOffPrice, id }: Props) => {
 	return (
 		<CardWrapper>
 			<CardInnerStyled>
-				<ImageBoxStyled>
-					<img
-						src='https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-se-red-select-20220322.jpg'
-						alt=''
-					/>
-				</ImageBoxStyled>
-				<CardTitleStyed>iPhone 11 64GB I Chính hãng VN/A</CardTitleStyed>
+				<Link to={`/detail/${id}`} className='img-box'>
+					<img src={img} alt={title} />
+				</Link>
+				<CardTitleStyed>{title}</CardTitleStyed>
 				<CardContentStyled>
 					<div className='price'>
-						<p className='show'>10.000.000d</p>
-						<p className='through'>10.000.000d</p>
+						<p className='show'>
+							{originalPrice &&
+								originalPrice.toLocaleString('vi', {
+									style: 'currency',
+									currency: 'VND',
+								})}
+						</p>
+						<p className='through'>
+							{saleOffPrice &&
+								saleOffPrice.toLocaleString('vi', {
+									style: 'currency',
+									currency: 'VND',
+								})}
+						</p>
 					</div>
 					<PromotionsStyled>
 						<div className='promo-list'>

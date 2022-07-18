@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import Breadcrumb from '~/components/Breadcrumb';
 import Card from '~/components/Card';
+import { getProducts } from '~/features/products';
+import { productSelector } from '~/features/products/productSelector';
 import { ContainerStyled } from '~/GlobalClasses';
 import DetailProduct from '~/modules/detail/DetailProduct';
+import { ProductType } from '~/types/product.type';
 import {
 	FeaturedProduct,
 	HeaderFeaturedStyled,
@@ -19,6 +24,14 @@ const BoxNameStyled = styled.div`
 `;
 
 const Detail = () => {
+	const dispatch = useAppDispatch();
+	const { products, isLoading, isSuccess } = useAppSelector((state) =>
+		productSelector(state)
+	);
+
+	useEffect(() => {
+		dispatch(getProducts());
+	}, [dispatch]);
 	return (
 		<div>
 			<Breadcrumb />
@@ -36,10 +49,20 @@ const Detail = () => {
 						<h2>ĐIỆN THOẠI NỔI BẬT NHẤT</h2>
 					</HeaderFeaturedStyled>
 					<ProductListStyled>
-						<Card />
-						<Card />
-						<Card />
-						<Card />
+						{products &&
+							products.length > 0 &&
+							products.map((item: ProductType) => {
+								return (
+									<Card
+										key={item.id}
+										id={item.id}
+										title={item.name}
+										originalPrice={item.originalPrice}
+										saleOffPrice={item.saleOffPrice}
+										img={item.img}
+									/>
+								);
+							})}
 					</ProductListStyled>
 				</FeaturedProduct>
 			</ContainerStyled>

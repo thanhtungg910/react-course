@@ -6,4 +6,5 @@ export interface ProductType {
 	feature: string;
 	description: string;
 	status: boolean;
+	img: string;
 }

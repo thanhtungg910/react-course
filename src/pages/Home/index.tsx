@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import Accessory from '~/components/Accessory';
@@ -9,6 +8,7 @@ import { getProducts } from '~/features/products';
 import { productSelector } from '~/features/products/productSelector';
 import { ContainerStyled, mixins } from '~/GlobalClasses';
 import BlockTopHome from '~/modules/home/BlockTopHome/BlockTopHome';
+import { ProductType } from '~/types/product.type';
 export const FeaturedProduct = styled.div`
 	margin-top: 20px;
 `;
@@ -37,7 +37,6 @@ const Home = () => {
 	const { products, isLoading, isSuccess } = useAppSelector((state) =>
 		productSelector(state)
 	);
-	console.log({ products, isLoading, isSuccess });
 
 	useEffect(() => {
 		dispatch(getProducts());
@@ -51,12 +50,20 @@ const Home = () => {
 						<h2>ĐIỆN THOẠI NỔI BẬT NHẤT</h2>
 					</HeaderFeaturedStyled>
 					<ProductListStyled>
-						<Card />
-						<Card />
-						<Card />
-						<Card />
-						<Card />
-						<Card />
+						{products &&
+							products.length > 0 &&
+							products.map((item: ProductType) => {
+								return (
+									<Card
+										key={item.id}
+										id={item.id}
+										title={item.name}
+										originalPrice={item.originalPrice}
+										saleOffPrice={item.saleOffPrice}
+										img={item.img}
+									/>
+								);
+							})}
 					</ProductListStyled>
 				</FeaturedProduct>
 				<AccessoryStyled>
