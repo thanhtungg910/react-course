@@ -1,11 +1,6 @@
-import {
-	LaptopOutlined,
-	NotificationOutlined,
-	UserOutlined,
-} from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
-import React, { memo, useState } from 'react';
+import { memo, useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '~/app/hooks';
 import images from '~/assets/logo';
@@ -18,36 +13,16 @@ import userSelector from '~/features/user/userSelector';
 const { Header, Content, Sider } = Layout;
 
 const items1: MenuProps['items'] = [
-	'Điện thoại',
-	'Laptop',
-	'Máy tính bảng',
-	'Âm thanh',
-].map((key) => ({
-	key,
-	label: <Link to='/dash-board/product-manager'>{key}</Link>,
+	{ name: 'Điện thoại', icon: images.phonepng },
+	{ name: 'Laptop', icon: images.laptop },
+	{ name: 'Máy tính bảng', icon: images.tablet },
+	{ name: 'Âm thanh', icon: images.tainghe },
+].map((item) => ({
+	key: item.name,
+	icon: <img src={item.icon} alt={item.name} className='w-8 h-8' />,
+	label: <Link to='/dash-board/product-manager'>{item.name}</Link>,
 }));
 
-const items2: MenuProps['items'] = [
-	UserOutlined,
-	LaptopOutlined,
-	NotificationOutlined,
-].map((icon, index) => {
-	const key = String(index + 1);
-
-	return {
-		key: `sub${key}`,
-		icon: React.createElement(icon),
-		label: `subnav ${key}`,
-
-		children: new Array(4).fill(null).map((_, j) => {
-			const subKey = index * 4 + j + 1;
-			return {
-				key: subKey,
-				label: `option${subKey}`,
-			};
-		}),
-	};
-});
 const menu = (
 	<Menu
 		items={[

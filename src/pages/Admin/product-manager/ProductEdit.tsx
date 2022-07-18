@@ -46,6 +46,10 @@ const ProductEdit = () => {
 	}
 	const onFinish = async (values: ProductType) => {
 		let img: string = data.img;
+		if (values.originalPrice <= values.saleOffPrice) {
+			await message.warning('Vui lòng kiểm tra lại giá');
+			return;
+		}
 		if (base64Image) {
 			await message.loading('Loading...');
 			img = await uploadImage(base64Image);
@@ -103,7 +107,15 @@ const ProductEdit = () => {
 							</ImageStyled>
 							<div className='short-desc'>
 								<h2>Mô tả ngắn</h2>
-								<Form.Item name='desc_short'>
+								<Form.Item
+									name='desc_short'
+									rules={[
+										{
+											required: true,
+											message: 'Vui lòng không để trống trường này!',
+										},
+									]}
+								>
 									<TextArea showCount maxLength={100} style={{ height: 120 }} />
 								</Form.Item>
 							</div>
@@ -142,7 +154,15 @@ const ProductEdit = () => {
 							</div>
 							<div className='w-1/2'>
 								<h2>Danh mục</h2>
-								<Form.Item name='category'>
+								<Form.Item
+									name='category'
+									rules={[
+										{
+											required: true,
+											message: 'Vui lòng không để trống trường này!',
+										},
+									]}
+								>
 									<Select allowClear size='large'>
 										{isSuccessCategory &&
 											dataCategory.map((item: Category) => (
@@ -155,13 +175,29 @@ const ProductEdit = () => {
 							</div>
 							<div>
 								<h2>Đặc điểm nổi bật</h2>
-								<Form.Item name='feature'>
+								<Form.Item
+									name='feature'
+									rules={[
+										{
+											required: true,
+											message: 'Vui lòng không để trống trường này!',
+										},
+									]}
+								>
 									<TextArea showCount maxLength={100} style={{ height: 120 }} />
 								</Form.Item>
 							</div>
 							<div>
 								<h2>Mô tả dài</h2>
-								<Form.Item name='description'>
+								<Form.Item
+									name='description'
+									rules={[
+										{
+											required: true,
+											message: 'Vui lòng không để trống trường này!',
+										},
+									]}
+								>
 									<TextArea showCount maxLength={100} style={{ height: 120 }} />
 								</Form.Item>
 							</div>
