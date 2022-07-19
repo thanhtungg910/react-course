@@ -12,8 +12,7 @@ import { useAppDispatch } from '~/app/hooks';
 import Button from '~/components/Button';
 import Dialog from '~/components/Dialog';
 import { provider } from '~/configs/firebase';
-import { User } from '~/types/user';
-import { login, loginWithGoogle } from '../userSlice';
+import { loginWithGoogle } from '../userSlice';
 
 const { Text, Title } = Typography;
 type Props = {
@@ -26,13 +25,6 @@ const SignInPage = ({ show, onClick }: Props) => {
 	const dispatch = useAppDispatch();
 	const auth = getAuth();
 
-	const onFinish = (values: User) => {
-		dispatch(login(values));
-	};
-
-	const onFinishFailed = (errorInfo: any) => {
-		console.log('Failed:', errorInfo);
-	};
 	const handleLoginWithFirebase = () => {
 		signInWithPopup(auth, provider)
 			.then((result: UserCredential) => {
@@ -61,8 +53,6 @@ const SignInPage = ({ show, onClick }: Props) => {
 				labelCol={{ span: 8 }}
 				wrapperCol={{ span: 32 }}
 				initialValues={{ remember: true }}
-				onFinish={onFinish}
-				onFinishFailed={onFinishFailed}
 				size='large'
 			>
 				<Form.Item

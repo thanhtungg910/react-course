@@ -5,6 +5,6 @@ const signUp = (data: User): any => {
 	return instance.post(baseUrl + '/signup', data);
 };
 const signIn = (data: User): any => {
-	return instance.post(baseUrl + '/users/signin', data);
+	return instance.post(baseUrl + '/signin', data);
 };
 export { signUp, signIn };

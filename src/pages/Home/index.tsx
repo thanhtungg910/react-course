@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import Accessory from '~/components/Accessory';
 import Button from '~/components/Button';
 import Card from '~/components/Card';
+import { ACCESSORY1, ACCESSORY2 } from '~/conts/accessories';
 import { getProducts } from '~/features/products';
 import { productSelector } from '~/features/products/productSelector';
 import { ContainerStyled, mixins } from '~/GlobalClasses';
@@ -14,7 +15,8 @@ export const FeaturedProduct = styled.div`
 `;
 export const ProductListStyled = styled.div`
 	${mixins.flexAlignCenter}
-	gap: 20px;
+	justify-content: flex-start;
+	gap: 15px 5px;
 	flex-wrap: wrap;
 	margin-top: 10px;
 `;
@@ -32,6 +34,7 @@ export const HeaderAccessoryStyled = styled(HeaderFeaturedStyled)`
 	justify-content: space-between;
 `;
 export const AccessoryList = styled(ProductListStyled)``;
+
 const Home = () => {
 	const dispatch = useAppDispatch();
 	const { products, isLoading, isSuccess } = useAppSelector((state) =>
@@ -74,16 +77,15 @@ const Home = () => {
 						</Button>
 					</HeaderAccessoryStyled>
 					<AccessoryList>
-						<Accessory
-							bgColor='rgb(252, 165, 165)'
-							img='https://cdn2.cellphones.com.vn/180x/https://cellphones.com.vn/media/icons/category/cate-868.svg'
-							title='CPU'
-						/>
-						<Accessory
-							title='Mainboard'
-							bgColor='rgb(249, 168, 212)'
-							img='https://cdn2.cellphones.com.vn/180x/https://cdn.cellphones.com.vn/media/catalog/product/m/a/mainboard_1.png'
-						/>
+						{ACCESSORY1.length > 0 &&
+							ACCESSORY1.map((item, index) => (
+								<Accessory
+									key={index}
+									title={item.title}
+									img={item.img}
+									bgColor={item.bgColor}
+								/>
+							))}
 					</AccessoryList>
 				</AccessoryStyled>
 				<AccessoryStyled>
@@ -94,16 +96,15 @@ const Home = () => {
 						</Button>
 					</HeaderAccessoryStyled>
 					<AccessoryList>
-						<Accessory
-							bgColor='rgb(252, 165, 165)'
-							img='https://cdn2.cellphones.com.vn/180x/https://cellphones.com.vn/media/icons/category/cate-868.svg'
-							title='CPU'
-						/>
-						<Accessory
-							title='Mainboard'
-							bgColor='rgb(249, 168, 212)'
-							img='https://cdn2.cellphones.com.vn/180x/https://cdn.cellphones.com.vn/media/catalog/product/m/a/mainboard_1.png'
-						/>
+						{ACCESSORY2.length > 0 &&
+							ACCESSORY2.map((item, index) => (
+								<Accessory
+									key={index}
+									title={item.title}
+									img={item.img}
+									bgColor={item.bgColor}
+								/>
+							))}
 					</AccessoryList>
 				</AccessoryStyled>
 			</>

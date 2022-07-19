@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 export interface Props {
-	bgColor: string;
-	img: string;
+	bgColor?: string;
+	img?: string;
 	title?: string;
 }
 const AccessoryStyled = styled.div`
 	width: 111px;
 	height: 125px;
 	border-radius: 5px;
-	color: #fff;
 `;
 const ContentStyled = styled.a<Props>`
 	width: 100%;
 	display: block;
 	overflow: hidden;
+	color: #fff;
 	text-decoration: none;
 	position: relative;
 	border-radius: 10px;

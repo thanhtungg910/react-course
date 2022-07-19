@@ -3,7 +3,7 @@ import { memo } from 'react';
 import styled from 'styled-components';
 
 const SearchStyled = styled.div`
-	width: 600px;
+	width: 500px;
 	position: relative;
 	span {
 		position: absolute;

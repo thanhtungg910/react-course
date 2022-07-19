@@ -2,8 +2,9 @@
   "users": [
     {
       "email": "admin@gmail.com",
-      "password": "$2a$10$7Eg.GVIDS6L47MOEtXGqtORUACAASrWL6Tv7DI184fbIx98q2e6BO",
-      "remember": true,
+      "password": "$2a$10$pJ5maZQ2KAPFS/Zcu/IVOOkjlyjRdkjhsy4rdAJ9lW2JD4oaie.W6",
+      "username": "admin@gmail.com",
+      "phone": "012345678",
       "id": 1
     }
   ],
