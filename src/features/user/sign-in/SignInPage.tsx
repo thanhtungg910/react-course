@@ -12,7 +12,8 @@ import { useAppDispatch } from '~/app/hooks';
 import Button from '~/components/Button';
 import Dialog from '~/components/Dialog';
 import { provider } from '~/configs/firebase';
-import { loginWithGoogle } from '../userSlice';
+import { User } from '~/types/user';
+import { login, loginWithGoogle } from '../userSlice';
 
 const { Text, Title } = Typography;
 type Props = {
@@ -44,6 +45,9 @@ const SignInPage = ({ show, onClick }: Props) => {
 				const credential = GoogleAuthProvider.credentialFromError(error);
 			});
 	};
+	const onFinish = (values: User) => {
+		dispatch(login(values));
+	};
 
 	return (
 		<Dialog title={<Title level={4}>Đăng nhập</Title>} visible={show}>
@@ -53,6 +57,7 @@ const SignInPage = ({ show, onClick }: Props) => {
 				labelCol={{ span: 8 }}
 				wrapperCol={{ span: 32 }}
 				initialValues={{ remember: true }}
+				onFinish={onFinish}
 				size='large'
 			>
 				<Form.Item

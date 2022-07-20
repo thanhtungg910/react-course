@@ -51,13 +51,14 @@ const GlobalStyles = createGlobalStyle`
     ${GlobalClasses}
         
     /* ANTD START */
-    .ant-layout-header,
-    .ant-layout-sider-trigger {
+    .ant-layout-header{
         background: #00B0D7;
         box-shadow: 0 2px 8px #f0f1f2;
         color: #fff;
     }
-
+    .ant-layout-sider-trigger {
+        background-color: transparent;
+    }
     .ant-layout-sider {
         background-color: #fafafa;
     }
