@@ -22,6 +22,8 @@ import { useAppSelector } from '~/app/hooks';
 import userSelector from '~/features/user/userSelector';
 import Dropdown from '~/components/Dropdown';
 import SignOut from '~/features/user/sign-out';
+import { useDebounce } from '~/hooks/useDebounce';
+import { searchProduct } from '~/api/api';
 
 const SignInPage = lazy(() => import('~/features/user/sign-in/SignInPage'));
 const SignUpPage = lazy(() => import('~/features/user/sign-up/SignUpPage'));
@@ -66,6 +68,8 @@ export const menu = (
 );
 
 const Navbar = () => {
+	const [textSearch, setTextSearch] = useState('');
+	const [products, setProducts] = useState([]);
 	const user = useAppSelector((state) => userSelector(state));
 	const [dialog, setDialog] = useState(Tab.SIGN_IN);
 	const [isModalVisible, setIsModalVisible] = useState(false);
@@ -98,6 +102,17 @@ const Navbar = () => {
 				return <></>;
 		}
 	};
+	const debounceValue = useDebounce(textSearch, 800);
+	useEffect(() => {
+		if (!debounceValue.trim()) {
+			return;
+		}
+		const handlerSearch = async () => {
+			const { data }: any = await searchProduct(debounceValue);
+			setProducts(data);
+		};
+		handlerSearch();
+	}, [debounceValue]);
 
 	return (
 		<>
@@ -108,7 +123,7 @@ const Navbar = () => {
 						<LogoStyled>
 							<img src={logos} alt='logo' />
 						</LogoStyled>
-						<SearchInput />
+						<SearchInput data={products} onChange={setTextSearch} />
 						<ActionsStyled className='action'>
 							<Button color='white'>
 								Gọi mua hàng <br />

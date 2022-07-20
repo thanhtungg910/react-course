@@ -18,3 +18,6 @@ export const setStatusFetchProduct = (data: {
 export const getProducts = () => {
 	return instance.get('/products');
 };
+export const searchProduct = (text: string) => {
+	return instance.get('/products?q=' + text);
+};

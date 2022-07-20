@@ -84,7 +84,7 @@ const Card = ({ img, title, originalPrice, saleOffPrice, id }: Props) => {
 		<CardWrapper>
 			<CardInnerStyled>
 				<Link to={`/detail/${id}`} className='img-box'>
-					<img src={img} alt={title} />
+					<img src={img} alt={title} loading='lazy' />
 				</Link>
 				<CardTitleStyed>{title}</CardTitleStyed>
 				<CardContentStyled>
