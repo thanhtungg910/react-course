@@ -57,7 +57,7 @@
       "categoryId": "1",
       "feature": "123123",
       "description": "123123",
-      "status": false,
+      "status": true,
       "img": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658126527/anhhtus/sjv4su3zjwyobfimnssl.jpg",
       "id": 5
     },
@@ -70,7 +70,7 @@
       "feature": "234324",
       "description": "234324",
       "img": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658126527/anhhtus/sjv4su3zjwyobfimnssl.jpg",
-      "status": true,
+      "status": false,
       "id": 6
     },
     {

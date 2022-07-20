@@ -24,7 +24,7 @@ module.exports = {
 		quotes: ['error', 'single'],
 		semi: ['error', 'always'],
 		camelcase: 2,
-		'no-console': 'off',
+		'no-console': 'error',
 		eqeqeq: [2, 'always'],
 		curly: 'error',
 		'react/react-in-jsx-scope': 'off',

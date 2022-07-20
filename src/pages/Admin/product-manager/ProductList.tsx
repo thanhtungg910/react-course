@@ -69,6 +69,7 @@ const ProductList = () => {
 		isError: isErrorCategory,
 		isSuccess: isSuccessCategory,
 		data: dataCategory,
+		isLoading,
 	} = useGetCategoriesQuery('Categories');
 
 	if (isError || isErrorCategory) {
@@ -108,9 +109,7 @@ const ProductList = () => {
 					</Select>
 				</Space>
 			</div>
-			{isSuccess && data && data.length > 0 && (
-				<Table columns={columns} data={data}></Table>
-			)}
+			<Table loading={isLoading} columns={columns} data={data}></Table>
 		</div>
 	);
 };

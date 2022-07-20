@@ -5,7 +5,7 @@ import {
 	UserOutlined,
 } from '@ant-design/icons';
 import { Menu } from 'antd';
-import { useEffect, useState } from 'react';
+import { lazy, useEffect, useState } from 'react';
 
 import { ContainerStyled } from '~/GlobalClasses';
 import logos from '~/assets/logo/logos.png';
@@ -18,12 +18,13 @@ import {
 import tracing from '~/assets/logo/tracking.svg';
 import Button from '~/components/Button';
 import SearchInput from '~/components/Search';
-import SignInPage from '~/features/user/sign-in/SignInPage';
-import SignUpPage from '~/features/user/sign-up/SignUpPage';
 import { useAppSelector } from '~/app/hooks';
 import userSelector from '~/features/user/userSelector';
 import Dropdown from '~/components/Dropdown';
 import SignOut from '~/features/user/sign-out';
+
+const SignInPage = lazy(() => import('~/features/user/sign-in/SignInPage'));
+const SignUpPage = lazy(() => import('~/features/user/sign-up/SignUpPage'));
 export enum Tab {
 	SIGN_IN = 1,
 	SIGN_UP = 2,
@@ -65,10 +66,9 @@ export const menu = (
 );
 
 const Navbar = () => {
+	const user = useAppSelector((state) => userSelector(state));
 	const [dialog, setDialog] = useState(Tab.SIGN_IN);
 	const [isModalVisible, setIsModalVisible] = useState(false);
-
-	const user = useAppSelector((state) => userSelector(state));
 
 	useEffect(() => {
 		if (user?.isLogin) {
@@ -95,7 +95,7 @@ const Navbar = () => {
 			case Tab.SIGN_UP:
 				return <SignUpPage show={isModalVisible} setShow={setIsModalVisible} />;
 			default:
-				break;
+				return <></>;
 		}
 	};
 

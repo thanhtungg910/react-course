@@ -56,6 +56,9 @@ const Home = () => {
 						{products &&
 							products.length > 0 &&
 							products.map((item: ProductType) => {
+								if (!item.status) {
+									return null;
+								}
 								return (
 									<Card
 										key={item.id}

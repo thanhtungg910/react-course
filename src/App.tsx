@@ -1,18 +1,19 @@
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAppSelector } from './app/hooks';
 import userSelector from './features/user/userSelector';
-import DashBoard from './layouts/Dash-board';
-import MainLayout from './layouts/MainLayout';
 import { privateRoutes, publicRoutes } from './routes/routes';
+const DashBoardLazy = lazy(() => import('./layouts/Dash-board'));
+const MainLayoutLazy = lazy(() => import('./layouts/MainLayout'));
 
 function App() {
 	const { user } = useAppSelector((state) => userSelector(state));
+
 	return (
 		<>
 			<Suspense fallback={<div>Loading...</div>}>
 				<Routes>
-					<Route element={<MainLayout />}>
+					<Route element={<MainLayoutLazy />}>
 						{publicRoutes.map((item, index) => {
 							let Comp;
 							if (item.component) {
@@ -25,7 +26,7 @@ function App() {
 					</Route>
 					<Route
 						path='dash-board'
-						element={user?.id !== 1 ? <Navigate to='/' /> : <DashBoard />}
+						element={user?.id !== 1 ? <Navigate to='/' /> : <DashBoardLazy />}
 					>
 						{privateRoutes.map((item, index) => {
 							let Comp;

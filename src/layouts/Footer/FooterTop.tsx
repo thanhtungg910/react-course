@@ -59,7 +59,7 @@ const FooterTop = () => {
 				<H3Styled>Đối tác dịch vụ bảo hành</H3Styled>
 				<p>Điện Thoại - Máy tính</p>
 				<H3Styled>Trung tâm bảo hành uỷ quyền Apple</H3Styled>
-				<div>
+				<div className='pr-12'>
 					<img src={images.dienthoaivui} alt='dienthoaivui' />
 				</div>
 			</div>
