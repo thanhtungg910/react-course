@@ -2,7 +2,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	user: {},
+	isError: false,
 	isLogin: false,
+	message: '',
 };
 export const userSlice = createSlice({
 	name: 'user',
@@ -11,6 +13,7 @@ export const userSlice = createSlice({
 		login: (state, payload) => {},
 		loginWithGoogle: (state, { payload }) => {
 			return {
+				...state,
 				isLogin: true,
 				user: {
 					...payload,
@@ -19,6 +22,7 @@ export const userSlice = createSlice({
 		},
 		loginSuccess: (state, { payload }) => {
 			return {
+				...state,
 				isLogin: true,
 				user: {
 					...payload?.data.user,
@@ -27,8 +31,22 @@ export const userSlice = createSlice({
 		},
 		signUp: (state, payload) => {},
 		signOut: () => initialState,
+		loginError: (state, { payload }) => {
+			return {
+				...state,
+				isError: true,
+				isLogin: false,
+				message: payload,
+			};
+		},
 	},
 });
-export const { login, loginSuccess, signUp, loginWithGoogle, signOut } =
-	userSlice.actions;
+export const {
+	login,
+	loginSuccess,
+	signUp,
+	loginWithGoogle,
+	signOut,
+	loginError,
+} = userSlice.actions;
 export default userSlice.reducer;

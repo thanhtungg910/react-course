@@ -51,7 +51,7 @@ const SignInPage = ({ show, onClick }: Props) => {
 
 	return (
 		<Dialog title={<Title level={4}>Đăng nhập</Title>} visible={show}>
-			<Alert message='Error' type='error' showIcon />
+			{/* <Alert message='Error' type='error' showIcon /> */}
 			<Form
 				layout='vertical'
 				labelCol={{ span: 8 }}

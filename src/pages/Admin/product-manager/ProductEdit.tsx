@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Col, Divider, Form, message, Row, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { memo, useState } from 'react';

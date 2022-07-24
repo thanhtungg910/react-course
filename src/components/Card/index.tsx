@@ -90,15 +90,15 @@ const Card = ({ img, title, originalPrice, saleOffPrice, id }: Props) => {
 				<CardContentStyled>
 					<div className='price'>
 						<p className='show'>
-							{originalPrice &&
-								originalPrice.toLocaleString('vi', {
+							{saleOffPrice &&
+								saleOffPrice.toLocaleString('vi', {
 									style: 'currency',
 									currency: 'VND',
 								})}
 						</p>
 						<p className='through'>
-							{saleOffPrice &&
-								saleOffPrice.toLocaleString('vi', {
+							{originalPrice &&
+								originalPrice.toLocaleString('vi', {
 									style: 'currency',
 									currency: 'VND',
 								})}

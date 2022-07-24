@@ -86,7 +86,7 @@ const SearchInput = ({
 			<SearchStyled {...props}>
 				<SearchOutlined />
 				<input type='search' onChange={(e) => onChange(e.target.value)} />
-				{data.length > 0 && (
+				{data && data.length > 0 && (
 					<DataFilterStyled>
 						{data.map((item: ProductType, index: React.Key) => (
 							<Link to={`/detail/${item.id}`} className='box' key={index}>
