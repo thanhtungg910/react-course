@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Input } from 'antd';
-import React, { memo } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
-import { SettingOutlined } from '@ant-design/icons';
 
 import { mixins } from '~/GlobalClasses';
 import { ProductType } from '~/types/product.type';

@@ -38,7 +38,7 @@ const Detail = () => {
 			quantity: 1,
 		};
 		dispatch(addToCart(payload));
-		message.success('Đặt thành công');
+		message.success('Đã thêm vào giỏ hàng');
 	};
 
 	useEffect(() => {

@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { useAppSelector } from './app/hooks';
 import userSelector from './features/user/userSelector';
 import { privateRoutes, publicRoutes } from './routes/routes';
@@ -8,6 +8,10 @@ const MainLayoutLazy = lazy(() => import('./layouts/MainLayout'));
 
 function App() {
 	const { user } = useAppSelector((state) => userSelector(state));
+	const { pathname } = useLocation();
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
 
 	return (
 		<>
