@@ -1,5 +1,12 @@
+import { memo } from 'react';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '~/app/hooks';
+import { cartSelector } from '~/features/cart/cartSelector';
+import { decrement, increment } from '~/features/cart/cartSlice';
 import { ContainerStyled, mixins } from '~/GlobalClasses';
+import CartModule from '~/modules/cart/CartModule';
+import { ProductType } from '~/types/product.type';
+
 const InnerStyled = styled.div`
 	max-width: 600px;
 	min-height: 200px;
@@ -18,20 +25,28 @@ const HeaderStyled = styled.div`
 	}
 `;
 const ContentStyled = styled.div``;
-const BoxStyled = styled.div`
-	margin: 20px 0;
-`;
-const ProductItem = styled.div`
-	display: flex;
-`;
-const ImageItem = styled.div`
-	width: 30%;
-`;
-const ProductActions = styled.div`
-	margin-left: 20px;
-`;
+const quantity = (data: ProductType[] | any): number => {
+	return data.reduce((pre: number, item: ProductType | any) => {
+		let price = 0;
+		if (item.saleOffPrice !== 0) {
+			price = item.saleOffPrice * item?.quantity;
+		} else {
+			price = item.originalPrice * item?.quantity;
+		}
+		return price + pre;
+	}, 0);
+};
 
 const Cart = () => {
+	const dispatch = useAppDispatch();
+	const productsInCart = useAppSelector((state) => cartSelector(state));
+	const handleIncrement = (id: number) => {
+		dispatch(increment(id));
+	};
+	const handleDecrement = (id: number) => {
+		dispatch(decrement(id));
+	};
+
 	return (
 		<ContainerStyled>
 			<InnerStyled>
@@ -39,48 +54,33 @@ const Cart = () => {
 					<h2>Giỏ hàng</h2>
 				</HeaderStyled>
 				<ContentStyled>
-					<BoxStyled>
-						<HeaderStyled>
-							<h3>apple</h3>
-							<h3>1.000.000d</h3>
-						</HeaderStyled>
-						<ProductItem>
-							<ImageItem>
-								<img
-									src='https://res.cloudinary.com/dv3vzmogk/image/upload/v1658126527/anhhtus/sjv4su3zjwyobfimnssl.jpg'
-									alt=''
-								/>
-							</ImageItem>
-							<ProductActions>
-								<input type='text' value={1} />
-							</ProductActions>
-						</ProductItem>
-					</BoxStyled>
-					<BoxStyled>
-						<HeaderStyled>
-							<h3>apple</h3>
-							<h3>1.000.000d</h3>
-						</HeaderStyled>
-						<ProductItem>
-							<ImageItem>
-								<img
-									src='https://res.cloudinary.com/dv3vzmogk/image/upload/v1658126527/anhhtus/sjv4su3zjwyobfimnssl.jpg'
-									alt=''
-								/>
-							</ImageItem>
-							<ProductActions>
-								<input type='text' value={1} />
-							</ProductActions>
-						</ProductItem>
-					</BoxStyled>
-					<HeaderStyled>
-						<h3>Tổng tiền</h3>
-						<h2 className='text-[#D70018]'>1.000.000d</h2>
-					</HeaderStyled>
+					{productsInCart.cart.length > 0 ? (
+						<>
+							<CartModule
+								productsInCart={productsInCart}
+								increment={handleIncrement}
+								decrement={handleDecrement}
+							/>
+							<HeaderStyled>
+								<h3>Tổng tiền</h3>
+								<h2 className='text-[#D70018]'>
+									{quantity(productsInCart.cart).toLocaleString('vi', {
+										style: 'currency',
+										currency: 'VND',
+									})}
+								</h2>
+							</HeaderStyled>
+						</>
+					) : (
+						<img
+							src='https://media.istockphoto.com/vectors/empty-shopping-bag-icon-online-business-vector-icon-template-vector-id861576608?k=20&m=861576608&s=612x612&w=0&h=UgHaPYlYrsPTO6BKKTzizGQqFgqEnn7eYK9EOA16uDs='
+							alt=''
+						/>
+					)}
 				</ContentStyled>
 			</InnerStyled>
 		</ContainerStyled>
 	);
 };
 
-export default Cart;
+export default memo(Cart);

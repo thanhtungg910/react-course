@@ -1,5 +1,5 @@
 export interface ProductType {
-	id: string | number;
+	id: number;
 	name: string;
 	originalPrice: number;
 	saleOffPrice: number;
@@ -7,4 +7,5 @@ export interface ProductType {
 	description: string;
 	status: boolean;
 	img: string;
+	quantity?: number;
 }

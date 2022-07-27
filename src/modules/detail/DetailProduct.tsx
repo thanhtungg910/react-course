@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Button from '~/components/Button';
-import { mixins } from '~/GlobalClasses';
+import { ProductType } from '~/types/product.type';
 const BoxDetailProductStyled = styled.div`
 	display: flex;
 	gap: 10px;
@@ -8,6 +8,7 @@ const BoxDetailProductStyled = styled.div`
 `;
 const BoxDetailLeft = styled.div`
 	overflow: hidden;
+	width: 30%;
 	.box-gallery {
 		padding: 10px;
 		margin-bottom: 10px;
@@ -111,7 +112,7 @@ const BoxOptionsStyled = styled.div`
 		}
 	}
 `;
-const BoxPromotionStyled = styled.div<any>`
+const BoxPromotionStyled = styled.div<{ color: string; bgHeader: string }>`
 	border-radius: 5px;
 	border: 1px solid ${(props) => props.color};
 	margin-top: 20px;
@@ -238,45 +239,49 @@ const specifications = [
 	},
 ];
 
-const DetailProduct = () => {
+const DetailProduct = ({
+	data,
+	onClick,
+}: {
+	data: ProductType;
+	onClick: (data: ProductType) => void;
+}) => {
 	return (
 		<BoxDetailProductStyled>
 			<BoxDetailLeft>
 				<div className='box-gallery'>
-					<img
-						src='https://cdn2.cellphones.com.vn/358x/media/catalog/product/s/a/samsung-galaxy-a73-1-600x600.jpg'
-						alt=''
-					/>
+					<img src={data.img} alt={data.name} />
 				</div>
 				<div className='gallery-thumbs'>
 					<div className='item-thumb'>
-						<img
-							src='https://cdn2.cellphones.com.vn/48x/media/catalog/product/g/a/galaxy-a73-grey-001.jpg'
-							alt=''
-						/>
+						<img src={data.img} alt={data.name} />
 					</div>
 					<div className='item-thumb'>
-						<img
-							src='https://cdn2.cellphones.com.vn/358x/media/catalog/product/s/a/samsung-galaxy-a73-1-600x600.jpg'
-							alt=''
-						/>
+						<img src={data.img} alt={data.name} />
 					</div>
 				</div>
 			</BoxDetailLeft>
 			<BoxDetailCenter>
 				<BoxInfoStyled>
-					<p className='price'>1.000.000đ</p>
-					<p className='old-price'>2.000.000đ</p>
+					<p className='price'>
+						{data.saleOffPrice.toLocaleString('vi', {
+							style: 'currency',
+							currency: 'VND',
+						})}
+					</p>
+					<p className='old-price'>
+						{data.originalPrice.toLocaleString('vi', {
+							style: 'currency',
+							currency: 'VND',
+						})}
+					</p>
 				</BoxInfoStyled>
 				<BoxOptionsStyled>
 					<div className='title'>Chọn màu để xem giá và chi nhánh có hàng</div>
 					<div className='options'>
 						<div className='box'>
 							<div className='sub-img'>
-								<img
-									src='https://cdn2.cellphones.com.vn/358x/media/catalog/product/s/a/samsung-galaxy-a73-1-600x600.jpg'
-									alt=''
-								/>
+								<img src={data.img} alt={data.name} />
 							</div>
 							<div className='content'>
 								<p>Trắng</p>
@@ -285,10 +290,7 @@ const DetailProduct = () => {
 						</div>
 						<div className='box active'>
 							<div className='sub-img'>
-								<img
-									src='https://cdn2.cellphones.com.vn/358x/media/catalog/product/s/a/samsung-galaxy-a73-1-600x600.jpg'
-									alt=''
-								/>
+								<img src={data.img} alt={data.name} />
 							</div>
 							<div className='content'>
 								<p>Trắng</p>
@@ -344,7 +346,9 @@ const DetailProduct = () => {
 					</div>
 				</BoxPromotionStyled>
 				<BoxActions>
-					<button className='add-to-cart'>Mua ngay</button>
+					<button className='add-to-cart' onClick={() => onClick(data)}>
+						Mua ngay
+					</button>
 					<div className='group-button'>
 						<Button
 							color='#fff'

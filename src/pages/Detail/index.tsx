@@ -1,8 +1,12 @@
+import { message } from 'antd';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { useGetProductQuery } from '~/api/product.api';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import Breadcrumb from '~/components/Breadcrumb';
 import Card from '~/components/Card';
+import { addToCart } from '~/features/cart/cartSlice';
 import { getProducts } from '~/features/products';
 import { productSelector } from '~/features/products/productSelector';
 import { ContainerStyled } from '~/GlobalClasses';
@@ -24,10 +28,18 @@ const BoxNameStyled = styled.div`
 `;
 
 const Detail = () => {
+	const { id } = useParams();
 	const dispatch = useAppDispatch();
-	const { products, isLoading, isSuccess } = useAppSelector((state) =>
-		productSelector(state)
-	);
+	const { products } = useAppSelector((state) => productSelector(state));
+	const { isSuccess, data } = useGetProductQuery(id);
+	const handleAddToCart = (data: ProductType) => {
+		const payload = {
+			...data,
+			quantity: 1,
+		};
+		dispatch(addToCart(payload));
+		message.success('Đặt thành công');
+	};
 
 	useEffect(() => {
 		dispatch(getProducts());
@@ -41,7 +53,7 @@ const Detail = () => {
 				</ContainerStyled>
 			</BoxNameStyled>
 			<ContainerStyled>
-				<DetailProduct />
+				{isSuccess && <DetailProduct data={data} onClick={handleAddToCart} />}
 			</ContainerStyled>
 			<ContainerStyled>
 				<FeaturedProduct>

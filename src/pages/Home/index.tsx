@@ -37,9 +37,7 @@ export const AccessoryList = styled(ProductListStyled)``;
 
 const Home = () => {
 	const dispatch = useAppDispatch();
-	const { products, isLoading, isSuccess } = useAppSelector((state) =>
-		productSelector(state)
-	);
+	const { products } = useAppSelector((state) => productSelector(state));
 
 	useEffect(() => {
 		dispatch(getProducts());
