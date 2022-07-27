@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { mixins } from '~/GlobalClasses';
 const WrapperStyled = styled.nav<object>`
@@ -8,7 +9,7 @@ const ContentStyled = styled.div`
 	justify-content: space-between;
 	padding: 10px 0;
 `;
-const LogoStyled = styled.div`
+const LogoStyled = styled(Link)`
 	width: 65px;
 	height: 57px;
 `;

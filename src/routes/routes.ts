@@ -11,9 +11,11 @@ const ProductListLazy = lazy(
 );
 const HomeLazy = lazy(() => import('~/pages/Home'));
 const DetailLazy = lazy(() => import('~/pages/Detail'));
+const CartLazy = lazy(() => import('~/pages/Cart'));
 
 const publicRoutes: Route[] = [
 	{ path: '', name: 'home', component: HomeLazy },
+	{ path: 'cart', name: 'cart', component: CartLazy },
 	{ path: 'detail/:id', name: 'detail', component: DetailLazy },
 ];
 const privateRoutes: Route[] = [

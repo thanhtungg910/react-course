@@ -120,7 +120,7 @@ const Navbar = () => {
 			<WrapperStyled>
 				<ContainerStyled>
 					<ContentStyled>
-						<LogoStyled>
+						<LogoStyled to='/'>
 							<img src={logos} alt='logo' />
 						</LogoStyled>
 						<SearchInput data={products} onChange={setTextSearch} />
@@ -143,6 +143,7 @@ const Navbar = () => {
 								đơn hàng
 							</Button>
 							<Button
+								href='cart'
 								color='white'
 								icon={<ShoppingOutlined style={{ fontSize: '26px' }} />}
 							>
