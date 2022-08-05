@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import Accessory from '~/components/Accessory';
 import Button from '~/components/Button';
 import Card from '~/components/Card';
-import { ACCESSORY1, ACCESSORY2 } from '~/conts/accessories';
+import { ACCESSORY1, ACCESSORY2 } from '~/const/accessories';
 import { getProducts } from '~/features/products';
 import { productSelector } from '~/features/products/productSelector';
 import { ContainerStyled, mixins } from '~/GlobalClasses';

@@ -1,8 +1,9 @@
+import { message } from 'antd';
 import { memo } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { cartSelector } from '~/features/cart/cartSelector';
-import { decrement, increment } from '~/features/cart/cartSlice';
+import { decrement, increment, removeItem } from '~/features/cart/cartSlice';
 import { ContainerStyled, mixins } from '~/GlobalClasses';
 import CartModule from '~/modules/cart/CartModule';
 import { ProductType } from '~/types/product.type';
@@ -42,9 +43,15 @@ const Cart = () => {
 	const productsInCart = useAppSelector((state) => cartSelector(state));
 	const handleIncrement = (id: number) => {
 		dispatch(increment(id));
+		message.success('Tăng số lượng thành công');
 	};
 	const handleDecrement = (id: number) => {
 		dispatch(decrement(id));
+		message.success('Giảm số lượng thành công');
+	};
+	const handleRemoveItem = (id: number) => {
+		dispatch(removeItem(id));
+		message.success('Xóa thành công');
 	};
 
 	return (
@@ -60,6 +67,7 @@ const Cart = () => {
 								productsInCart={productsInCart}
 								increment={handleIncrement}
 								decrement={handleDecrement}
+								removeItem={handleRemoveItem}
 							/>
 							<HeaderStyled>
 								<h3>Tổng tiền</h3>

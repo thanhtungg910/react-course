@@ -25,8 +25,6 @@ import SignOut from '~/features/user/sign-out';
 import { useDebounce } from '~/hooks/useDebounce';
 import { searchProduct } from '~/api/api';
 
-const SignInPage = lazy(() => import('~/features/user/sign-in/SignInPage'));
-const SignUpPage = lazy(() => import('~/features/user/sign-up/SignUpPage'));
 export enum Tab {
 	SIGN_IN = 1,
 	SIGN_UP = 2,
@@ -71,37 +69,7 @@ const Navbar = () => {
 	const [textSearch, setTextSearch] = useState('');
 	const [products, setProducts] = useState([]);
 	const user = useAppSelector((state) => userSelector(state));
-	const [dialog, setDialog] = useState(Tab.SIGN_IN);
-	const [isModalVisible, setIsModalVisible] = useState(false);
 
-	useEffect(() => {
-		if (user?.isLogin) {
-			setIsModalVisible(false);
-		}
-	}, [user]);
-
-	const showModal = () => {
-		setIsModalVisible(true);
-	};
-	const handlerSetDialog = () => {
-		setDialog(Tab.SIGN_UP);
-	};
-	const Dialog = () => {
-		switch (dialog) {
-			case Tab.SIGN_IN:
-				return (
-					<SignInPage
-						show={isModalVisible}
-						setShow={setIsModalVisible}
-						onClick={handlerSetDialog}
-					/>
-				);
-			case Tab.SIGN_UP:
-				return <SignUpPage show={isModalVisible} setShow={setIsModalVisible} />;
-			default:
-				return <></>;
-		}
-	};
 	const debounceValue = useDebounce(textSearch, 800);
 	useEffect(() => {
 		if (!debounceValue.trim()) {
@@ -116,7 +84,6 @@ const Navbar = () => {
 
 	return (
 		<>
-			{Dialog()}
 			<WrapperStyled>
 				<ContainerStyled>
 					<ContentStyled>
@@ -161,7 +128,7 @@ const Navbar = () => {
 								<Button
 									color='white'
 									icon={<UserOutlined style={{ fontSize: '26px' }} />}
-									onClick={showModal}
+									href='/sign-in'
 								>
 									Đăng
 									<br /> nhập

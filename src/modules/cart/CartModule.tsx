@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Input } from 'antd';
+import { Button, Input, Popconfirm } from 'antd';
 import { memo } from 'react';
 import styled from 'styled-components';
 
@@ -32,6 +32,7 @@ type Props = {
 	productsInCart: any;
 	increment: (id: number) => void;
 	decrement: (id: number) => void;
+	removeItem: (id: number) => void;
 };
 const handlePrice = (data: ProductType | any): number => {
 	if (data.saleOffPrice !== 0) {
@@ -40,7 +41,12 @@ const handlePrice = (data: ProductType | any): number => {
 	return data.originalPrice * data?.quantity;
 };
 
-const CartModule = ({ productsInCart, increment, decrement }: Props) => {
+const CartModule = ({
+	productsInCart,
+	increment,
+	decrement,
+	removeItem,
+}: Props) => {
 	return productsInCart.cart.map((item: ProductType) => (
 		<BoxStyled key={item.id}>
 			<HeaderStyled>
@@ -61,6 +67,14 @@ const CartModule = ({ productsInCart, increment, decrement }: Props) => {
 						<Button onClick={() => increment(item.id)}>+</Button>
 						<Input style={{ width: '50%' }} value={item.quantity} />
 						<Button onClick={() => decrement(item.id)}>-</Button>
+						<Popconfirm
+							title='Bạn có chắc muốn xóa?'
+							onConfirm={() => removeItem(item.id)}
+							okText='Yes'
+							cancelText='No'
+						>
+							<Button>Xoa</Button>
+						</Popconfirm>
 					</Input.Group>
 				</ProductActions>
 			</ProductItem>

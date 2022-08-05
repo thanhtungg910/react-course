@@ -2,13 +2,19 @@
 import { call, put } from 'redux-saga/effects';
 import { signIn, signUp } from '~/api/auth.api';
 import { User } from '~/types/user';
-import { loginError, loginSuccess } from './userSlice';
+import {
+	loginError,
+	loginSuccess,
+	signUpError,
+	signUpSuccess,
+} from './userSlice';
 
 export function* handlerUser({ payload }: { payload: User }): any {
 	try {
 		yield call(signUp, payload);
-	} catch (error) {
-		console.log(error);
+		yield put(signUpSuccess());
+	} catch (error: any) {
+		yield put(signUpError(error?.response?.data));
 	}
 }
 export function* handlerLoginUser({ payload }: { payload: User }): any {
