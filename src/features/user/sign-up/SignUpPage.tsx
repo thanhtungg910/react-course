@@ -70,7 +70,7 @@ const SignUpPage = () => {
 				data: { user },
 			} = await signUp(values);
 			if (user.email) {
-				await message.success('Sign up success', 500);
+				await message.success('Sign up success');
 				navigate('/sign-in');
 				return;
 			}

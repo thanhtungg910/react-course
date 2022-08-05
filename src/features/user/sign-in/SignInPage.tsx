@@ -84,7 +84,7 @@ const SignInPage = () => {
 				data: { user },
 			} = await signIn(values);
 			if (user.email) {
-				await message.success('Login success', 500);
+				await message.success('Login success');
 				dispatch(loginSuccess(user));
 				navigate('/');
 				return;
