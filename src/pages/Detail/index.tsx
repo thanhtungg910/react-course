@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
 	useGetByIdCategoryMutation,
@@ -31,9 +31,8 @@ const BoxNameStyled = styled.div`
 `;
 
 const Detail = () => {
-	const { id } = useParams();
+	const { id = 0 } = useParams();
 	const dispatch = useAppDispatch();
-	const { products } = useAppSelector((state) => productSelector(state));
 	const { isSuccess, data } = useGetProductQuery(id);
 	const [getById, { isSuccess: isSuccessTogether, data: productsTogether }] =
 		useGetByIdCategoryMutation();
@@ -48,8 +47,11 @@ const Detail = () => {
 	};
 
 	useEffect(() => {
-		dispatch(getProducts());
-	}, [dispatch]);
+		if (isSuccess) {
+			getById(data.categoryId);
+		}
+	}, [data]);
+
 	return (
 		<div>
 			<Breadcrumb />
@@ -67,9 +69,12 @@ const Detail = () => {
 						<h2>SẢN PHẨM CÙNG LOẠI</h2>
 					</HeaderFeaturedStyled>
 					<ProductListStyled>
-						{products &&
-							products.length > 0 &&
-							products.map((item: ProductType) => {
+						{isSuccessTogether &&
+							productsTogether.length > 0 &&
+							productsTogether.map((item: ProductType) => {
+								if (item.id === +id || !item.status) {
+									return null;
+								}
 								return (
 									<Card
 										key={item.id}

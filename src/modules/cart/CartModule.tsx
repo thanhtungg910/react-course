@@ -17,6 +17,20 @@ const ImageItem = styled.div`
 `;
 const ProductActions = styled.div`
 	margin-left: 20px;
+	.price {
+		display: flex;
+		align-items: flex-end;
+		font-weight: 600;
+		line-height: 1.4;
+		color: #333;
+		column-gap: 5px;
+		.show {
+			color: red;
+		}
+		.through {
+			text-decoration: line-through;
+		}
+	}
 `;
 
 const HeaderStyled = styled.div`
@@ -49,32 +63,44 @@ const CartModule = ({
 }: Props) => {
 	return productsInCart.cart.map((item: ProductType) => (
 		<BoxStyled key={item.id}>
-			<HeaderStyled>
-				<h3>{item.name}</h3>
-				<h3>
-					{handlePrice(item).toLocaleString('vi', {
-						style: 'currency',
-						currency: 'VND',
-					})}
-				</h3>
-			</HeaderStyled>
 			<ProductItem>
 				<ImageItem>
 					<img src={item.img} alt={item.name} />
 				</ImageItem>
 				<ProductActions>
-					<Input.Group compact>
-						<Button onClick={() => increment(item.id)}>+</Button>
-						<Input style={{ width: '50%' }} value={item.quantity} />
-						<Button onClick={() => decrement(item.id)}>-</Button>
+					<HeaderStyled>
+						<h3>{item.name}</h3>
 						<Popconfirm
 							title='Bạn có chắc muốn xóa?'
 							onConfirm={() => removeItem(item.id)}
 							okText='Yes'
 							cancelText='No'
 						>
-							<Button>Xoa</Button>
+							<span className='cursor-pointer'>X</span>
 						</Popconfirm>
+					</HeaderStyled>
+					<div className='price'>
+						<p className='show'>
+							{item.saleOffPrice &&
+								item.saleOffPrice.toLocaleString('vi', {
+									style: 'currency',
+									currency: 'VND',
+								})}
+						</p>
+						<p className='through'>
+							{item.originalPrice &&
+								item.originalPrice.toLocaleString('vi', {
+									style: 'currency',
+									currency: 'VND',
+								})}
+						</p>
+					</div>
+
+					<Input.Group compact className='w-1/2'>
+						Chọn số lượng:
+						<Button onClick={() => increment(item.id)}>+</Button>
+						<Input style={{ width: '50%' }} value={item.quantity} />
+						<Button onClick={() => decrement(item.id)}>-</Button>
 					</Input.Group>
 				</ProductActions>
 			</ProductItem>

@@ -28,6 +28,7 @@ const ButtonStyled = styled.div<any>`
 		justify-content: center;
 		border-radius: 5px;
 		background-color: ${(props) => props.bgColor};
+		border: ${(props) => props?.border};
 		&:hover,
 		:active {
 			background-color: ${(props) => props.bgHover || props.theme.hoverBg};

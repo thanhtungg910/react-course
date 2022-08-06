@@ -2,6 +2,7 @@ import { message } from 'antd';
 import { memo } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
+import Button from '~/components/Button';
 import { cartSelector } from '~/features/cart/cartSelector';
 import { decrement, increment, removeItem } from '~/features/cart/cartSlice';
 import { ContainerStyled, mixins } from '~/GlobalClasses';
@@ -70,7 +71,7 @@ const Cart = () => {
 								removeItem={handleRemoveItem}
 							/>
 							<HeaderStyled>
-								<h3>Tổng tiền</h3>
+								<h3>Tổng tiền tạm tính: </h3>
 								<h2 className='text-[#D70018]'>
 									{quantity(productsInCart.cart).toLocaleString('vi', {
 										style: 'currency',
@@ -86,6 +87,17 @@ const Cart = () => {
 						/>
 					)}
 				</ContentStyled>
+				<Button
+					color='white'
+					bgColor='#DC3545'
+					bgHover='#DC3545'
+					padding='15px'
+				>
+					Tiến hành đặt hàng
+				</Button>
+				<Button color='#DC3545' padding='15px' border='1px solod #DC3545'>
+					Chọn thêm sản phẩm khác
+				</Button>
 			</InnerStyled>
 		</ContainerStyled>
 	);
