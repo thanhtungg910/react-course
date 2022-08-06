@@ -2,7 +2,10 @@ import { message } from 'antd';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { useGetProductQuery } from '~/api/product.api';
+import {
+	useGetByIdCategoryMutation,
+	useGetProductQuery,
+} from '~/api/product.api';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import Breadcrumb from '~/components/Breadcrumb';
 import Card from '~/components/Card';
@@ -32,6 +35,9 @@ const Detail = () => {
 	const dispatch = useAppDispatch();
 	const { products } = useAppSelector((state) => productSelector(state));
 	const { isSuccess, data } = useGetProductQuery(id);
+	const [getById, { isSuccess: isSuccessTogether, data: productsTogether }] =
+		useGetByIdCategoryMutation();
+
 	const handleAddToCart = (data: ProductType) => {
 		const payload = {
 			...data,
@@ -58,7 +64,7 @@ const Detail = () => {
 			<ContainerStyled>
 				<FeaturedProduct>
 					<HeaderFeaturedStyled>
-						<h2>ĐIỆN THOẠI NỔI BẬT NHẤT</h2>
+						<h2>SẢN PHẨM CÙNG LOẠI</h2>
 					</HeaderFeaturedStyled>
 					<ProductListStyled>
 						{products &&
@@ -68,6 +74,7 @@ const Detail = () => {
 									<Card
 										key={item.id}
 										id={item.id}
+										categoryId={item.categoryId}
 										title={item.name}
 										originalPrice={item.originalPrice}
 										saleOffPrice={item.saleOffPrice}

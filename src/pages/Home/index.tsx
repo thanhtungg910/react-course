@@ -12,12 +12,7 @@ import BlockTopHome from '~/modules/home/BlockTopHome/BlockTopHome';
 import { ProductType } from '~/types/product.type';
 import { useGetCategoriesQuery } from '~/api/category.api';
 import { Category } from '~/types/category.type';
-import {
-	NavigateOptions,
-	URLSearchParamsInit,
-	useNavigate,
-	useSearchParams,
-} from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 export const FeaturedProduct = styled.div`
 	margin-top: 20px;
@@ -102,6 +97,7 @@ const Home = () => {
 									<Card
 										key={item.id}
 										id={item.id}
+										categoryId={item.categoryId}
 										title={item.name}
 										originalPrice={item.originalPrice}
 										saleOffPrice={item.saleOffPrice}

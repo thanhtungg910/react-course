@@ -1,5 +1,6 @@
 export interface ProductType {
 	id: number;
+	categoryId: number | string;
 	name: string;
 	originalPrice: number;
 	saleOffPrice: number;
