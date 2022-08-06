@@ -156,7 +156,7 @@ const ProductEdit = () => {
 							<div className='w-1/2'>
 								<h2>Danh mục</h2>
 								<Form.Item
-									name='category'
+									name='categoryId'
 									rules={[
 										{
 											required: true,

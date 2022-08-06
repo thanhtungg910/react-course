@@ -26,6 +26,8 @@ const SearchStyled = styled.div`
 `;
 const DataFilterStyled = styled.div`
 	position: absolute;
+	height: 200px;
+	overflow-y: scroll;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	top: 99%;
@@ -35,6 +37,9 @@ const DataFilterStyled = styled.div`
 	background-color: #fff;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	padding: 20px;
+	::-webkit-scrollbar-thumb {
+		width: 2px;
+	}
 	.box {
 		display: flex;
 		gap: 10px;
@@ -64,16 +69,21 @@ const DataFilterStyled = styled.div`
 		}
 	}
 `;
+interface Props {
+	data?: any;
+	className?: string;
+	onChange?: React.Dispatch<React.SetStateAction<string>> | any;
+	setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+	visibility: boolean;
+}
 
 const SearchInput = ({
 	className,
 	onChange,
 	data,
-}: {
-	data?: any;
-	className?: string;
-	onChange?: React.Dispatch<React.SetStateAction<string>> | any;
-}) => {
+	visibility,
+	setVisibility,
+}: Props) => {
 	let props = {};
 	if (className) {
 		props = {
@@ -86,10 +96,15 @@ const SearchInput = ({
 			<SearchStyled {...props}>
 				<SearchOutlined />
 				<input type='search' onChange={(e) => onChange(e.target.value)} />
-				{data && data.length > 0 && (
+				{visibility && data && data.length > 0 && (
 					<DataFilterStyled>
 						{data.map((item: ProductType, index: React.Key) => (
-							<Link to={`/detail/${item.id}`} className='box' key={index}>
+							<Link
+								to={`/detail/${item.id}`}
+								className='box'
+								key={index}
+								onClick={() => setVisibility(false)}
+							>
 								<div className='img'>
 									<img src={item.img} loading='lazy' alt={item.name} />
 								</div>

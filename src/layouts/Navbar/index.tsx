@@ -4,7 +4,7 @@ import {
 	ShoppingOutlined,
 	UserOutlined,
 } from '@ant-design/icons';
-import { Menu } from 'antd';
+import { Menu, Select } from 'antd';
 import { lazy, useEffect, useState } from 'react';
 
 import { ContainerStyled } from '~/GlobalClasses';
@@ -24,6 +24,9 @@ import Dropdown from '~/components/Dropdown';
 import SignOut from '~/features/user/sign-out';
 import { useDebounce } from '~/hooks/useDebounce';
 import { searchProduct } from '~/api/api';
+import { ProductType } from '~/types/product.type';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export enum Tab {
 	SIGN_IN = 1,
@@ -67,9 +70,9 @@ export const menu = (
 
 const Navbar = () => {
 	const [textSearch, setTextSearch] = useState('');
+	const [visibility, setVisibility] = useState(false);
 	const [products, setProducts] = useState([]);
 	const user = useAppSelector((state) => userSelector(state));
-
 	const debounceValue = useDebounce(textSearch, 800);
 	useEffect(() => {
 		if (!debounceValue.trim()) {
@@ -78,6 +81,7 @@ const Navbar = () => {
 		const handlerSearch = async () => {
 			const { data }: any = await searchProduct(debounceValue);
 			setProducts(data);
+			setVisibility(true);
 		};
 		handlerSearch();
 	}, [debounceValue]);
@@ -90,7 +94,12 @@ const Navbar = () => {
 						<LogoStyled to='/'>
 							<img src={logos} alt='logo' />
 						</LogoStyled>
-						<SearchInput data={products} onChange={setTextSearch} />
+						<SearchInput
+							data={products}
+							onChange={setTextSearch}
+							visibility={visibility}
+							setVisibility={setVisibility}
+						/>
 						<ActionsStyled className='action'>
 							<Button color='white'>
 								Gọi mua hàng <br />
