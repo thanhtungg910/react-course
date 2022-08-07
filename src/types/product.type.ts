@@ -6,6 +6,7 @@ export interface ProductType {
 	saleOffPrice: number;
 	feature: string;
 	description: string;
+	desc_short: string;
 	status: boolean;
 	img: string;
 	quantity?: number;

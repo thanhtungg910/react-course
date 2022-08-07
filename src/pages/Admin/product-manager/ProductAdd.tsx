@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import 'react-quill/dist/quill.snow.css';
 import { Col, Divider, Form, message, Row, Select } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
 import { memo, useState } from 'react';
 import ReactQuill from 'react-quill';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +17,7 @@ import { mixins } from '~/GlobalClasses';
 import { Category } from '~/types/category.type';
 import { ProductType } from '~/types/product.type';
 import { checkImage } from '~/utils/helper';
+import { toolbarOptions } from '~/const/module-react-quill';
 
 const ImageStyled = styled.div`
 	${mixins.flexCenter}
@@ -78,20 +78,6 @@ const ProductAdd = () => {
 			setBase64Image(reader?.result);
 		};
 	};
-	const toolbarOptions = [
-		['bold', 'italic', 'underline', 'strike', 'link', 'image'], // toggled buttons
-
-		[{ header: 1 }, { header: 2 }], // custom button values
-		[{ list: 'ordered' }, { list: 'bullet' }],
-		[{ indent: '-1' }, { indent: '+1' }], // outdent/indent
-		[{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-		[{ color: [] }, { background: [] }], // dropdown with defaults from theme
-		[{ font: [] }],
-		[{ align: [] }],
-
-		['clean'], // remove formatting button
-	];
 
 	return (
 		<div>

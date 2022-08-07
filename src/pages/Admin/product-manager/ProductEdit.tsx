@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import 'react-quill/dist/quill.snow.css';
 import { Col, Divider, Form, message, Row, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { memo, useState } from 'react';
@@ -19,6 +20,8 @@ import { mixins } from '~/GlobalClasses';
 import { Category } from '~/types/category.type';
 import { ProductType } from '~/types/product.type';
 import { checkImage } from '~/utils/helper';
+import { toolbarOptions } from '~/const/module-react-quill';
+import ReactQuill from 'react-quill';
 
 const ImageStyled = styled.div`
 	${mixins.flexCenter}
@@ -117,7 +120,7 @@ const ProductEdit = () => {
 										},
 									]}
 								>
-									<TextArea showCount maxLength={100} style={{ height: 120 }} />
+									<ReactQuill style={{ height: 200 }} />
 								</Form.Item>
 							</div>
 						</Col>
@@ -174,7 +177,7 @@ const ProductEdit = () => {
 									</Select>
 								</Form.Item>
 							</div>
-							<div>
+							<div className='h-64'>
 								<h2>Đặc điểm nổi bật</h2>
 								<Form.Item
 									name='feature'
@@ -185,10 +188,15 @@ const ProductEdit = () => {
 										},
 									]}
 								>
-									<TextArea showCount maxLength={100} style={{ height: 120 }} />
+									<ReactQuill
+										style={{ height: 200 }}
+										modules={{
+											toolbar: toolbarOptions,
+										}}
+									/>
 								</Form.Item>
 							</div>
-							<div>
+							<div className='h-64'>
 								<h2>Mô tả dài</h2>
 								<Form.Item
 									name='description'
@@ -199,7 +207,12 @@ const ProductEdit = () => {
 										},
 									]}
 								>
-									<TextArea showCount maxLength={100} style={{ height: 120 }} />
+									<ReactQuill
+										style={{ height: 200 }}
+										modules={{
+											toolbar: toolbarOptions,
+										}}
+									/>
 								</Form.Item>
 							</div>
 							<div className='w-1/6 mt-3 p-2'>

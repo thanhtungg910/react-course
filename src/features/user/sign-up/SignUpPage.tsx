@@ -134,7 +134,7 @@ const SignUpPage = () => {
 						>
 							Đăng kí
 						</Button>
-						<h2 className='text-center'>Hoặc đăng nhập bằng</h2>
+						<h2 className='text-center'>Hoặc đăng ký bằng</h2>
 						<ActionStyled>
 							<span>
 								<img src={images.facebook} alt='facebook' />

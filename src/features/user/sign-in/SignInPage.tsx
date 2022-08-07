@@ -7,7 +7,7 @@ import {
 	UserInfo,
 } from 'firebase/auth';
 import { memo, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { signIn } from '~/api/auth.api';
 
@@ -140,6 +140,9 @@ const SignInPage = () => {
 								<img src={images.google} alt='google' />
 							</span>
 						</ActionStyled>
+						<div className='text-xs'>
+							Bạn chưa có tài khoản <Link to='/sign-up'>Đăng ký</Link>
+						</div>
 					</FormStyled>
 					<ImageStyled>
 						<img src={images.anhhtusLogo2} alt='LOGO' />

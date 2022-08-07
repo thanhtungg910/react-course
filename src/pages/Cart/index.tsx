@@ -59,7 +59,8 @@ const Cart = () => {
 		<ContainerStyled>
 			<InnerStyled>
 				<HeaderStyled>
-					<h2>Giỏ hàng</h2>
+					<h5 className='cursor-pointer text-[#D70018]'>Trở về</h5>
+					<h2 className='text-center mx-auto text-[#D70018]'>Giỏ hàng</h2>
 				</HeaderStyled>
 				<ContentStyled>
 					{productsInCart.cart.length > 0 ? (
@@ -79,6 +80,22 @@ const Cart = () => {
 									})}
 								</h2>
 							</HeaderStyled>
+							<Button
+								color='white'
+								bgColor='#DC3545'
+								bgHover='#DC3545'
+								padding='15px'
+							>
+								Tiến hành đặt hàng
+							</Button>
+							<Button
+								href='/'
+								color='#DC3545'
+								padding='15px'
+								border='1px solod #DC3545'
+							>
+								Chọn thêm sản phẩm khác
+							</Button>
 						</>
 					) : (
 						<img
@@ -87,17 +104,6 @@ const Cart = () => {
 						/>
 					)}
 				</ContentStyled>
-				<Button
-					color='white'
-					bgColor='#DC3545'
-					bgHover='#DC3545'
-					padding='15px'
-				>
-					Tiến hành đặt hàng
-				</Button>
-				<Button color='#DC3545' padding='15px' border='1px solod #DC3545'>
-					Chọn thêm sản phẩm khác
-				</Button>
 			</InnerStyled>
 		</ContainerStyled>
 	);
