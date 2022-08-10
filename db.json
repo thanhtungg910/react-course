@@ -27,6 +27,20 @@
       "username": "thanhtung910",
       "phone": "23432432423432432",
       "id": 4
+    },
+    {
+      "email": "trantunggg910@gmail.com",
+      "password": "$2a$10$WWYptb/xVJtVd6frebzN4.DqV78lLMW6nI.0AgNcx8KFWJNFayP5u",
+      "username": "thanhtung910",
+      "phone": "12345678",
+      "id": 5
+    },
+    {
+      "email": "iphone4s.0910@gmail.com",
+      "password": "$2a$10$mCrooncBTXyZXHEqOvW/M.i6CcHczuiv2uDLkQZbtqqjNoJpCa5iO",
+      "username": "thanhtung910",
+      "phone": "12345678",
+      "id": 6
     }
   ],
   "products": [
@@ -149,6 +163,18 @@
       "img": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1659806098/anhhtus/avj5x9sovwzkuy0xlyre.jpg",
       "status": true,
       "id": 10
+    },
+    {
+      "desc_short": "<h2><em>Mô tả ngắn</em></h2>",
+      "name": "san pham 2",
+      "originalPrice": 2000,
+      "saleOffPrice": 1000,
+      "categoryId": 2,
+      "feature": "<ol><li>a</li><li>2</li><li>2</li></ol>",
+      "description": "<h2><strong>Mô tả dài </strong></h2>",
+      "img": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1659919715/anhhtus/sbznbccnvajhxi6jvyh3.jpg",
+      "status": true,
+      "id": 11
     }
   ],
   "categories": [

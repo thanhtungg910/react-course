@@ -27,7 +27,7 @@ const HeaderStyled = styled.div`
 	}
 `;
 const ContentStyled = styled.div``;
-const quantity = (data: ProductType[] | any): number => {
+export const quantity = (data: ProductType[] | any): number => {
 	return data.reduce((pre: number, item: ProductType | any) => {
 		let price = 0;
 		if (item.saleOffPrice !== 0) {
@@ -81,6 +81,7 @@ const Cart = () => {
 								</h2>
 							</HeaderStyled>
 							<Button
+								href='/checkout'
 								color='white'
 								bgColor='#DC3545'
 								bgHover='#DC3545'

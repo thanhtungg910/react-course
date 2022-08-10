@@ -37,7 +37,7 @@ export const userSlice = createSlice({
 				message: '',
 			};
 		},
-		signUp: (state, action) => {},
+		signUp: (state) => {},
 		signUpError: (state, { payload }) => {
 			return {
 				...state,
