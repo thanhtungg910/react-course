@@ -55,7 +55,7 @@ const Checkout = () => {
 																<dl className='mt-1 space-y-1 text-xs text-gray-500'>
 																	<div>
 																		<dt className='inline'>Số lượng: </dt>
-																		<dd className='inline'>222</dd>
+																		<dd className='inline'>{item.quantity}</dd>
 																	</div>
 																</dl>
 															</div>
