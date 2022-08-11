@@ -3,6 +3,7 @@ import { baseUrl } from './api';
 
 export const orderApi = createApi({
 	reducerPath: 'orderApi',
+	tagTypes: ['orders'],
 	baseQuery: fetchBaseQuery({ baseUrl }),
 	endpoints: (builder) => ({
 		createOrder: builder.mutation({
@@ -14,6 +15,9 @@ export const orderApi = createApi({
 				};
 			},
 		}),
+		getOrders: builder.query({
+			query: () => 'orders?_sort=id&_order=desc',
+		}),
 	}),
 });
-export const { useCreateOrderMutation } = orderApi;
+export const { useCreateOrderMutation, useGetOrdersQuery } = orderApi;

@@ -3,7 +3,6 @@ import { SearchOutlined } from '@ant-design/icons';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { mixins } from '~/GlobalClasses';
 import { ProductType } from '~/types/product.type';
 
 const SearchStyled = styled.div`
@@ -74,7 +73,7 @@ interface Props {
 	className?: string;
 	onChange?: React.Dispatch<React.SetStateAction<string>> | any;
 	setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
-	visibility: boolean;
+	visibility?: boolean;
 }
 
 const SearchInput = ({

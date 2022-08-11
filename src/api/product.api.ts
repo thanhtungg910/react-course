@@ -47,9 +47,9 @@ export const productApi = createApi({
 			},
 		}),
 		getByIdCategory: builder.mutation({
-			query: (id?: string | number) => {
+			query: (id: string | number = '') => {
 				let url = 'products?_sort=id&_order=desc';
-				if (id) {
+				if (id && id !== '') {
 					url = 'products?_sort=id&_order=desc&categoryId=' + id;
 				}
 				return {

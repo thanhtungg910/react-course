@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
 import { memo, useState } from 'react';
@@ -13,14 +14,17 @@ import userSelector from '~/features/user/userSelector';
 const { Header, Content, Sider } = Layout;
 
 const items1: MenuProps['items'] = [
-	{ name: 'Điện thoại', icon: images.phonepng },
-	{ name: 'Laptop', icon: images.laptop },
-	{ name: 'Máy tính bảng', icon: images.tablet },
-	{ name: 'Âm thanh', icon: images.tainghe },
+	{ name: 'Điện thoại', icon: images.phonepng, path: '/' },
+	{ name: 'Laptop', icon: images.laptop, path: '/' },
+	{ name: 'Máy tính bảng', icon: images.tablet, path: '/' },
+	{ name: 'Âm thanh', icon: images.tainghe, path: '/' },
+	{ name: 'Orders', icon: images.cart, path: '/orders' },
 ].map((item) => ({
 	key: item.name,
 	icon: <img src={item.icon} alt={item.name} className='w-8 h-8' />,
-	label: <Link to='/dash-board/product-manager'>{item.name}</Link>,
+	label: (
+		<Link to={`/dash-board/product-manager${item?.path}`}>{item.name}</Link>
+	),
 }));
 
 const menu = (
@@ -61,7 +65,7 @@ const DashBoard = () => {
 					<div className='p-2'>
 						<img src={images.logo} alt='logo' />
 					</div>
-					<Search className='text-black' />
+					<Search className='text-black' setVisibility={() => {}} />
 					<div className='account'>
 						{user.isLogin && (
 							<Dropdown
