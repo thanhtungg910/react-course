@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable indent */
 import {
 	EnvironmentOutlined,
 	ShoppingOutlined,
 	UserOutlined,
 } from '@ant-design/icons';
-import { Menu, Select } from 'antd';
-import { lazy, useEffect, useState } from 'react';
+import { Menu } from 'antd';
+import { useEffect, useState } from 'react';
 
 import { ContainerStyled } from '~/GlobalClasses';
 import logos from '~/assets/logo/logos.png';
@@ -24,9 +25,6 @@ import Dropdown from '~/components/Dropdown';
 import SignOut from '~/features/user/sign-out';
 import { useDebounce } from '~/hooks/useDebounce';
 import { searchProduct } from '~/api/api';
-import { ProductType } from '~/types/product.type';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export enum Tab {
 	SIGN_IN = 1,

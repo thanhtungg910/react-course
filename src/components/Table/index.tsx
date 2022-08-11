@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 import { Table as TableAntd, TableProps } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 interface DataType {

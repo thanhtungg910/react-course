@@ -13,6 +13,7 @@ const HomeLazy = lazy(() => import('~/pages/Home'));
 const DetailLazy = lazy(() => import('~/pages/Detail'));
 const CartLazy = lazy(() => import('~/pages/Cart'));
 const CheckoutLazy = lazy(() => import('~/pages/Checkout'));
+const OrderLazy = lazy(() => import('~/pages/Admin/order-manager'));
 
 const publicRoutes: Route[] = [
 	{ path: '', name: 'home', component: HomeLazy },
@@ -30,6 +31,11 @@ const privateRoutes: Route[] = [
 		path: 'product-manager/product-add',
 		name: 'product-add',
 		component: ProductAddLazy,
+	},
+	{
+		path: 'product-manager/orders',
+		name: 'order',
+		component: OrderLazy,
 	},
 	{
 		path: 'product-manager/product-edit/:id',

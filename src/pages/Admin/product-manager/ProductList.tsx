@@ -78,7 +78,7 @@ const ProductList = () => {
 	}
 
 	useEffect(() => {
-		filterData();
+		filterData('');
 	}, []);
 
 	const handlerOnChange = useCallback((e: string) => {
