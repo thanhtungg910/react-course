@@ -194,5 +194,29 @@
       "id": 4,
       "name": "Đồng hồ"
     }
+  ],
+  "orders": [
+    {
+      "userId": 2,
+      "productsOrder": [
+        {
+          "id": 11,
+          "name": "san pham 2",
+          "img": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1659919715/anhhtus/sbznbccnvajhxi6jvyh3.jpg",
+          "quantity": 1,
+          "categoryId": 2,
+          "originalPrice": 2000,
+          "saleOffPrice": 1000
+        }
+      ],
+      "createAt": "2022-08-11T05:26:33.740Z",
+      "user_name": "thanhtung910",
+      "last_name": "a",
+      "email": "trantungg910@gmail.com",
+      "phone": "23432432423432432",
+      "delivery_address": "a",
+      "payment_on_delivery": true,
+      "id": 1
+    }
   ]
 }
