@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Checkbox, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { useState } from 'react';
 interface Props {
+	user: any;
 	onFinish: (value: any) => void;
 }
-const FormCheckout = ({ onFinish }: Props) => {
+const FormCheckout = ({ onFinish, user }: Props) => {
 	const [indeterminate, setIndeterminate] = useState(false);
 
 	return (
@@ -19,6 +21,7 @@ const FormCheckout = ({ onFinish }: Props) => {
 					name='user_name'
 					className='block mb-1 text-sm text-gray-600'
 					rules={[{ required: true, message: 'Please input your username!' }]}
+					initialValue={user?.user?.username}
 				>
 					<Input className='rounded-lg shadow-sm border-gray-200 w-full text-sm p-2.5' />
 				</Form.Item>
@@ -39,6 +42,7 @@ const FormCheckout = ({ onFinish }: Props) => {
 					name='email'
 					className='block mb-1 text-sm text-gray-600'
 					rules={[{ required: true, message: 'Please input your email!' }]}
+					initialValue={user?.user?.email}
 				>
 					<Input
 						type='email'
@@ -52,6 +56,7 @@ const FormCheckout = ({ onFinish }: Props) => {
 					name='phone'
 					className='block mb-1 text-sm text-gray-600'
 					rules={[{ required: true, message: 'Please input your phone!' }]}
+					initialValue={user?.user?.phone}
 				>
 					<Input
 						type='number'

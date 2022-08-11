@@ -7,6 +7,7 @@ import { productApi } from '~/api/product.api';
 import rootReducer from './rootReducer';
 import { rootSaga } from './rootSaga';
 import { categoryApi } from '~/api/category.api';
+import { orderApi } from '~/api/order.api';
 const sagaMiddleware = createSagaMiddleware();
 
 const persistConfig = {
@@ -21,6 +22,7 @@ export const store = configureStore({
 		persistedReducer,
 		[productApi.reducerPath]: productApi.reducer,
 		[categoryApi.reducerPath]: categoryApi.reducer,
+		[orderApi.reducerPath]: orderApi.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
