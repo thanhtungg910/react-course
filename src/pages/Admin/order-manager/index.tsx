@@ -80,7 +80,7 @@ const columns = [
 ];
 
 const OrderPageManager = () => {
-	const { isLoading, isSuccess, data } = useGetOrdersQuery('');
+	const { isSuccess, data } = useGetOrdersQuery('');
 
 	return (
 		<>

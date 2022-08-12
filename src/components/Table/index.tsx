@@ -34,7 +34,7 @@ const Table = ({ columns, data, header, ...passProps }: Props) => {
 			columns={columns}
 			dataSource={data}
 			onChange={onChange}
-			title={() => header}
+			// title={() => header}
 		/>
 	);
 };
