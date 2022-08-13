@@ -2,6 +2,7 @@ import { message } from 'antd';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useCreateOrderMutation } from '~/api/order.api';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
+import OrderConst from '~/const/order.const';
 import { cartSelector } from '~/features/cart/cartSelector';
 import { removeCart } from '~/features/cart/cartSlice';
 import userSelector from '~/features/user/userSelector';
@@ -35,7 +36,7 @@ const Checkout = () => {
 			userId: user?.user.id,
 			productsOrder: [...productsOrder],
 			createAt: new Date(),
-			accessOrder: false,
+			accessOrder: OrderConst.NEW_ORDER,
 			...values,
 		};
 		createBrotliDecompress(payload);

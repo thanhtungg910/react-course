@@ -12,7 +12,7 @@ const productSlice = createSlice({
 	name: 'products',
 	initialState,
 	reducers: {
-		getProducts: (state) => {},
+		getProducts: (state, action) => {},
 		setProductSuccess: (state, { payload }): any => {
 			return {
 				...state,

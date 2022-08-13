@@ -27,7 +27,12 @@ export const store = configureStore({
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: false,
-		}).concat(productApi.middleware, categoryApi.middleware, sagaMiddleware),
+		}).concat(
+			productApi.middleware,
+			categoryApi.middleware,
+			orderApi.middleware,
+			sagaMiddleware
+		),
 });
 const persistor = persistStore(store);
 sagaMiddleware.run(rootSaga);

@@ -6,6 +6,7 @@ import moment from 'moment';
 import { Link, useParams } from 'react-router-dom';
 import { useGetOrderQuery } from '~/api/order.api';
 import Table from '~/components/Table';
+import { quantity } from '~/pages/Cart';
 
 const columns = [
 	{ key: '2', title: 'Tên sản phẩm', dataIndex: 'name' },
@@ -77,6 +78,15 @@ const DetailOrder = () => {
 								columns={columns}
 								data={data.productsOrder}
 							></Table>
+							<h2 className='text-lg font-bold'>
+								Tổng tiền thu hộ:{' '}
+								<span className='text-red-500'>
+									{quantity(data.productsOrder).toLocaleString('vi', {
+										style: 'currency',
+										currency: 'VND',
+									})}
+								</span>
+							</h2>
 						</Col>
 					</Row>
 				</div>

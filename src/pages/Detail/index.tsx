@@ -1,20 +1,17 @@
 import { message } from 'antd';
 import { useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
 	useGetByIdCategoryMutation,
 	useGetProductQuery,
 } from '~/api/product.api';
-import { useAppDispatch, useAppSelector } from '~/app/hooks';
+import { useAppDispatch } from '~/app/hooks';
 import Breadcrumb from '~/components/Breadcrumb';
 import Button from '~/components/Button';
 import Card from '~/components/Card';
 import { addToCart } from '~/features/cart/cartSlice';
-import { getProducts } from '~/features/products';
-import { productSelector } from '~/features/products/productSelector';
 import { ContainerStyled } from '~/GlobalClasses';
-import { ContentStyled } from '~/layouts/Navbar/Navbar';
 import DetailProduct from '~/modules/detail/DetailProduct';
 import { ProductType } from '~/types/product.type';
 import {
@@ -33,7 +30,7 @@ const BoxNameStyled = styled.div`
 `;
 
 const Detail = () => {
-	const { id = 0 } = useParams();
+	const { id } = useParams();
 	const dispatch = useAppDispatch();
 	const { isSuccess, data } = useGetProductQuery(id);
 	const [getById, { isSuccess: isSuccessTogether, data: productsTogether }] =
@@ -78,7 +75,7 @@ const Detail = () => {
 								{isSuccessTogether &&
 									productsTogether.length > 0 &&
 									productsTogether.map((item: ProductType) => {
-										if (item.id === +id || !item.status) {
+										if (!id || item.id === +id || !item.status) {
 											return null;
 										}
 										return (

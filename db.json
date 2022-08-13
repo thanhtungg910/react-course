@@ -204,29 +204,6 @@
   ],
   "orders": [
     {
-      "userId": 1,
-      "productsOrder": [
-        {
-          "id": 11,
-          "name": "san pham 2",
-          "img": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1659919715/anhhtus/sbznbccnvajhxi6jvyh3.jpg",
-          "quantity": 1,
-          "categoryId": 2,
-          "originalPrice": 2000,
-          "saleOffPrice": 1000
-        }
-      ],
-      "createAt": "2022-08-11T06:05:56.295Z",
-      "accessOrder": false,
-      "user_name": "Thanh ",
-      "last_name": "Tung",
-      "email": "admin@gmail.com",
-      "phone": "12345678",
-      "delivery_address": "aaa",
-      "payment_on_delivery": true,
-      "id": 1
-    },
-    {
       "userId": 2,
       "productsOrder": [
         {
@@ -249,7 +226,7 @@
         }
       ],
       "createAt": "2022-08-13T01:41:51.449Z",
-      "accessOrder": false,
+      "accessOrder": 1,
       "user_name": "thanhtung910",
       "last_name": "ABC",
       "email": "trantungg910@gmail.com",
@@ -281,7 +258,7 @@
         }
       ],
       "createAt": "2022-08-13T01:46:56.905Z",
-      "accessOrder": false,
+      "accessOrder": 1,
       "user_name": "thanh Tung910",
       "last_name": "aaa",
       "email": "iphone4ss.0910@gmail.com",
