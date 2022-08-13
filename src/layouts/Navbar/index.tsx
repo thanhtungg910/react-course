@@ -25,6 +25,7 @@ import Dropdown from '~/components/Dropdown';
 import SignOut from '~/features/user/sign-out';
 import { useDebounce } from '~/hooks/useDebounce';
 import { searchProduct } from '~/api/api';
+import { Link } from 'react-router-dom';
 
 export enum Tab {
 	SIGN_IN = 1,
@@ -37,13 +38,9 @@ export const menu = (
 			{
 				key: '1',
 				label: (
-					<a
-						target='_blank'
-						rel='noopener noreferrer'
-						href='https://www.antgroup.com'
-					>
+					<Link rel='noopener noreferrer' to='/my-order'>
 						Đơn hàng của tôi
-					</a>
+					</Link>
 				),
 			},
 			{
@@ -70,7 +67,7 @@ const Navbar = () => {
 	const [textSearch, setTextSearch] = useState('');
 	const [visibility, setVisibility] = useState(false);
 	const [products, setProducts] = useState([]);
-	const user = useAppSelector((state) => userSelector(state));
+	const user: any = useAppSelector((state) => userSelector(state));
 	const debounceValue = useDebounce(textSearch, 800);
 	useEffect(() => {
 		if (!debounceValue.trim()) {

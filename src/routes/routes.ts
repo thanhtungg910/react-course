@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import { Route } from './routes.type';
+const MyOrderLazy = lazy(() => import('~/pages/MyOrder'));
 const ProductAddLazy = lazy(
 	() => import('~/pages/Admin/product-manager/ProductAdd')
 );
@@ -21,6 +22,7 @@ const publicRoutes: Route[] = [
 	{ path: 'cart', name: 'cart', component: CartLazy },
 	{ path: 'detail/:id', name: 'detail', component: DetailLazy },
 	{ path: '/checkout', name: 'checkout', component: CheckoutLazy },
+	{ path: '/my-order', name: 'myOrder', component: MyOrderLazy },
 ];
 const privateRoutes: Route[] = [
 	{

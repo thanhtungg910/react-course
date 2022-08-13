@@ -15,10 +15,26 @@ export const orderApi = createApi({
 					body: data,
 				};
 			},
+			invalidatesTags: ['Orders'],
 		}),
 		getOrders: builder.query({
-			query: (accessOrder: number) =>
-				`orders?_sort=id&_order=desc&accessOrder=${accessOrder}`,
+			query: (accessOrder = 0) => {
+				let url = 'orders?_sort=id&_order=desc';
+				if (accessOrder !== 0) {
+					url = `orders?_sort=id&_order=desc&accessOrder=${accessOrder}`;
+				}
+				return url;
+			},
+			providesTags: ['Orders'],
+		}),
+		userGetOrder: builder.query({
+			query: (userId?: number) => {
+				let url = 'orders?_sort=id&_order=desc';
+				if (userId) {
+					url = `orders?_sort=id&_order=desc&userId=${userId}`;
+				}
+				return url;
+			},
 			providesTags: ['Orders'],
 		}),
 		getOrder: builder.query({
@@ -40,7 +56,7 @@ export const orderApi = createApi({
 			query: (data) => {
 				return {
 					url: `orders/${data.id}`,
-					method: 'DELETE',
+					method: 'PATCH',
 					body: data,
 				};
 			},
@@ -55,6 +71,7 @@ export const {
 	useGetOrderQuery,
 	useUpdateOrderMutation,
 	useRemoveOrderMutation,
+	useUserGetOrderQuery,
 } = orderApi;
 export const accessOrder = (id: string) => {
 	return instance.put(`orders/${id}`, {

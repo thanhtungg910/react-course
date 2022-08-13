@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Tabs } from 'antd';
 import OrderConst from '~/const/order.const';
+import OrderCancel from './OrderCancel';
 
 import OrderNew from './OrderNew';
+import Received from './Received';
+import Shipping from './Shipping';
+import WaitShip from './WaitShip';
 const { TabPane } = Tabs;
 
 const OrderPageManager = () => {
@@ -13,16 +17,16 @@ const OrderPageManager = () => {
 					<OrderNew />
 				</TabPane>
 				<TabPane tab='Chờ vận chuyển' key={OrderConst.WAIT_SHIPPER}>
-					Chờ vận chuyển
+					<WaitShip />
 				</TabPane>
 				<TabPane tab='Đang vận chuyển' key={OrderConst.SHIPPING}>
-					Content of Tab Pane 2
+					<Shipping />
 				</TabPane>
 				<TabPane tab='Nhận hàng thành công' key={OrderConst.DONE}>
-					Content of Tab Pane 3
+					<Received />
 				</TabPane>
 				<TabPane tab='Đơn đã hủy' key={OrderConst.CANCEL}>
-					Content of Tab Pane 3
+					<OrderCancel />
 				</TabPane>
 			</Tabs>
 		</>

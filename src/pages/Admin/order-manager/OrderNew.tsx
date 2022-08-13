@@ -1,5 +1,4 @@
 import {
-	accessOrder,
 	useGetOrdersQuery,
 	useRemoveOrderMutation,
 	useUpdateOrderMutation,
@@ -10,10 +9,10 @@ import { EyeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { Button, Tag } from 'antd';
 import { ProductType } from '~/types/product.type';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import OrderConst from '~/const/order.const';
 
-const columns = [
+export const columns = [
 	{
 		key: '1',
 		title: '#',
@@ -110,8 +109,12 @@ const OrderNew = () => {
 
 				return (
 					<>
-						<Button onClick={handlerAccessOrder}>Xác nhận</Button>
-						<Button danger className='mt-2' onClick={handlerCancelOrder}>
+						<Button onClick={() => handlerAccessOrder()}>Xác nhận</Button>
+						<Button
+							danger
+							className='mt-2'
+							onClick={() => handlerCancelOrder()}
+						>
 							Hủy
 						</Button>
 					</>
