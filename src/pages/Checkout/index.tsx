@@ -33,7 +33,7 @@ const Checkout = () => {
 
 		const payload = {
 			userId: user?.user.id,
-			productsOrder,
+			productsOrder: [...productsOrder],
 			createAt: new Date(),
 			accessOrder: false,
 			...values,

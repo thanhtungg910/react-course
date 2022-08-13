@@ -4,7 +4,7 @@ import { Col, Form, Input, Row, Tag } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import moment from 'moment';
 import { Link, useParams } from 'react-router-dom';
-import { useGetOrderQuery, useGetOrdersQuery } from '~/api/order.api';
+import { useGetOrderQuery } from '~/api/order.api';
 import Table from '~/components/Table';
 
 const columns = [

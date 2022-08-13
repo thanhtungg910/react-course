@@ -6,11 +6,15 @@ import { Link } from 'react-router-dom';
 import { useGetOrdersQuery } from '~/api/order.api';
 import Table from '~/components/Table';
 import { ProductType } from '~/types/product.type';
+import React from 'react';
 const columns = [
 	{
 		key: '1',
 		title: '#',
 		dataIndex: 'id',
+		render: (_: ProductType, item: ProductType, index: number) => {
+			return <h1>{index + 1}</h1>;
+		},
 	},
 	{ key: '2', title: 'Tên khách hàng', dataIndex: 'user_name' },
 	{ key: '3', title: 'Email', dataIndex: 'email' },
@@ -48,8 +52,8 @@ const columns = [
 		render: (_item: any) => {
 			return (
 				<ul>
-					{_item.map((item: ProductType) => (
-						<li key={item.id}>
+					{_item.map((item: ProductType, index: React.Key) => (
+						<li key={item.id} className={`${index === 1 && 'border-t-2'}`}>
 							<h2>
 								<span className='font-semibold'>Tên sản phẩm:</span> {item.name}
 							</h2>
@@ -72,7 +76,7 @@ const columns = [
 					to={`${_id}?user_name=${item.user_name}`}
 					className='text-[#00B0D7]'
 				>
-					<EyeOutlined />
+					<EyeOutlined style={{ fontSize: '1.5rem' }} />
 				</Link>
 			);
 		},
