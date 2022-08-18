@@ -156,7 +156,7 @@ const ProductAdd = () => {
 								</Select>
 							</Form.Item>
 						</div>
-						<div className='h-72'>
+						<div className='h-[30rem] max-w-[830px]'>
 							<h2>Đặc điểm nổi bật</h2>
 							<Form.Item
 								name='feature'
@@ -168,14 +168,14 @@ const ProductAdd = () => {
 								]}
 							>
 								<ReactQuill
-									style={{ height: 200 }}
+									style={{ height: 400 }}
 									modules={{
 										toolbar: toolbarOptions,
 									}}
 								/>
 							</Form.Item>
 						</div>
-						<div className='h-64'>
+						<div className='h-[30rem] max-w-[830px]'>
 							<h2>Mô tả dài</h2>
 							<Form.Item
 								name='description'
@@ -187,7 +187,7 @@ const ProductAdd = () => {
 								]}
 							>
 								<ReactQuill
-									style={{ height: 200 }}
+									style={{ height: 400 }}
 									modules={{
 										toolbar: toolbarOptions,
 									}}
