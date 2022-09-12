@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
+import 'react-quill/dist/quill.snow.css';
 import { Col, Divider, Form, message, Row, Select } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
 import { memo, useState } from 'react';
+import ReactQuill from 'react-quill';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useGetCategoriesQuery } from '~/api/category.api';
@@ -16,6 +17,7 @@ import { mixins } from '~/GlobalClasses';
 import { Category } from '~/types/category.type';
 import { ProductType } from '~/types/product.type';
 import { checkImage } from '~/utils/helper';
+import { toolbarOptions } from '~/const/module-react-quill';
 
 const ImageStyled = styled.div`
 	${mixins.flexCenter}
@@ -45,6 +47,7 @@ const ProductAdd = () => {
 		message.success('Tạo sản phẩm thành công');
 		navigate('/dash-board/product-manager');
 	}
+
 	const onFinish = async (values: ProductType) => {
 		if (!base64Image) {
 			return;
@@ -96,7 +99,7 @@ const ProductAdd = () => {
 									},
 								]}
 							>
-								<TextArea showCount maxLength={100} style={{ height: 120 }} />
+								<ReactQuill style={{ height: 200 }} />
 							</Form.Item>
 						</div>
 					</Col>
@@ -135,7 +138,7 @@ const ProductAdd = () => {
 						<div className='w-1/2'>
 							<h2>Danh mục</h2>
 							<Form.Item
-								name='category'
+								name='categoryId'
 								rules={[
 									{
 										required: true,
@@ -153,7 +156,7 @@ const ProductAdd = () => {
 								</Select>
 							</Form.Item>
 						</div>
-						<div>
+						<div className='h-[30rem] max-w-[830px]'>
 							<h2>Đặc điểm nổi bật</h2>
 							<Form.Item
 								name='feature'
@@ -164,10 +167,15 @@ const ProductAdd = () => {
 									},
 								]}
 							>
-								<TextArea showCount maxLength={100} style={{ height: 120 }} />
+								<ReactQuill
+									style={{ height: 400 }}
+									modules={{
+										toolbar: toolbarOptions,
+									}}
+								/>
 							</Form.Item>
 						</div>
-						<div>
+						<div className='h-[30rem] max-w-[830px]'>
 							<h2>Mô tả dài</h2>
 							<Form.Item
 								name='description'
@@ -178,10 +186,15 @@ const ProductAdd = () => {
 									},
 								]}
 							>
-								<TextArea showCount maxLength={100} style={{ height: 120 }} />
+								<ReactQuill
+									style={{ height: 400 }}
+									modules={{
+										toolbar: toolbarOptions,
+									}}
+								/>
 							</Form.Item>
 						</div>
-						<div className='w-1/6 mt-3 p-2'>
+						<div className='w-1/6 mt-5 p-2'>
 							<Button
 								color='#fff'
 								bgColor='#00B0D7'

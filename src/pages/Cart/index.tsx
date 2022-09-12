@@ -1,8 +1,10 @@
+import { message } from 'antd';
 import { memo } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
+import Button from '~/components/Button';
 import { cartSelector } from '~/features/cart/cartSelector';
-import { decrement, increment } from '~/features/cart/cartSlice';
+import { decrement, increment, removeItem } from '~/features/cart/cartSlice';
 import { ContainerStyled, mixins } from '~/GlobalClasses';
 import CartModule from '~/modules/cart/CartModule';
 import { ProductType } from '~/types/product.type';
@@ -25,7 +27,7 @@ const HeaderStyled = styled.div`
 	}
 `;
 const ContentStyled = styled.div``;
-const quantity = (data: ProductType[] | any): number => {
+export const quantity = (data: ProductType[] | any): number => {
 	return data.reduce((pre: number, item: ProductType | any) => {
 		let price = 0;
 		if (item.saleOffPrice !== 0) {
@@ -42,16 +44,23 @@ const Cart = () => {
 	const productsInCart = useAppSelector((state) => cartSelector(state));
 	const handleIncrement = (id: number) => {
 		dispatch(increment(id));
+		message.success('Tăng số lượng thành công');
 	};
 	const handleDecrement = (id: number) => {
 		dispatch(decrement(id));
+		message.success('Giảm số lượng thành công');
+	};
+	const handleRemoveItem = (id: number) => {
+		dispatch(removeItem(id));
+		message.success('Xóa thành công');
 	};
 
 	return (
 		<ContainerStyled>
 			<InnerStyled>
 				<HeaderStyled>
-					<h2>Giỏ hàng</h2>
+					<h5 className='cursor-pointer text-[#D70018]'>Trở về</h5>
+					<h2 className='text-center mx-auto text-[#D70018]'>Giỏ hàng</h2>
 				</HeaderStyled>
 				<ContentStyled>
 					{productsInCart.cart.length > 0 ? (
@@ -60,9 +69,10 @@ const Cart = () => {
 								productsInCart={productsInCart}
 								increment={handleIncrement}
 								decrement={handleDecrement}
+								removeItem={handleRemoveItem}
 							/>
 							<HeaderStyled>
-								<h3>Tổng tiền</h3>
+								<h3>Tổng tiền tạm tính: </h3>
 								<h2 className='text-[#D70018]'>
 									{quantity(productsInCart.cart).toLocaleString('vi', {
 										style: 'currency',
@@ -70,6 +80,23 @@ const Cart = () => {
 									})}
 								</h2>
 							</HeaderStyled>
+							<Button
+								href='/checkout'
+								color='white'
+								bgColor='#DC3545'
+								bgHover='#DC3545'
+								padding='15px'
+							>
+								Tiến hành đặt hàng
+							</Button>
+							<Button
+								href='/'
+								color='#DC3545'
+								padding='15px'
+								border='1px solod #DC3545'
+							>
+								Chọn thêm sản phẩm khác
+							</Button>
 						</>
 					) : (
 						<img

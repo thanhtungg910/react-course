@@ -74,6 +74,9 @@ const GlobalStyles = createGlobalStyle`
     .ant-form-item-label {
         text-align: left;
     } 
+    .ant-form-item{
+        margin-bottom: 5px !important;
+    }
     /* ANTD END */
     a {
         color: #333;

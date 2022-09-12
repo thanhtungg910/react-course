@@ -7,6 +7,7 @@ import { productApi } from '~/api/product.api';
 import rootReducer from './rootReducer';
 import { rootSaga } from './rootSaga';
 import { categoryApi } from '~/api/category.api';
+import { orderApi } from '~/api/order.api';
 const sagaMiddleware = createSagaMiddleware();
 
 const persistConfig = {
@@ -21,11 +22,17 @@ export const store = configureStore({
 		persistedReducer,
 		[productApi.reducerPath]: productApi.reducer,
 		[categoryApi.reducerPath]: categoryApi.reducer,
+		[orderApi.reducerPath]: orderApi.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: false,
-		}).concat(productApi.middleware, categoryApi.middleware, sagaMiddleware),
+		}).concat(
+			productApi.middleware,
+			categoryApi.middleware,
+			orderApi.middleware,
+			sagaMiddleware
+		),
 });
 const persistor = persistStore(store);
 sagaMiddleware.run(rootSaga);

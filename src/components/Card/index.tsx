@@ -78,12 +78,20 @@ export interface Props {
 	originalPrice: number;
 	saleOffPrice: number;
 	id: number | string;
+	categoryId: number | string;
 }
-const Card = ({ img, title, originalPrice, saleOffPrice, id }: Props) => {
+const Card = ({
+	img,
+	title,
+	originalPrice,
+	saleOffPrice,
+	id,
+	categoryId,
+}: Props) => {
 	return (
 		<CardWrapper>
 			<CardInnerStyled>
-				<Link to={`/detail/${id}`} className='img-box'>
+				<Link to={`/detail/${id}?categoryId=${categoryId}`} className='img-box'>
 					<img src={img} alt={title} loading='lazy' />
 				</Link>
 				<CardTitleStyed>{title}</CardTitleStyed>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable indent */
 import {
 	EnvironmentOutlined,
@@ -5,7 +6,7 @@ import {
 	UserOutlined,
 } from '@ant-design/icons';
 import { Menu } from 'antd';
-import { lazy, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ContainerStyled } from '~/GlobalClasses';
 import logos from '~/assets/logo/logos.png';
@@ -24,9 +25,8 @@ import Dropdown from '~/components/Dropdown';
 import SignOut from '~/features/user/sign-out';
 import { useDebounce } from '~/hooks/useDebounce';
 import { searchProduct } from '~/api/api';
+import { Link } from 'react-router-dom';
 
-const SignInPage = lazy(() => import('~/features/user/sign-in/SignInPage'));
-const SignUpPage = lazy(() => import('~/features/user/sign-up/SignUpPage'));
 export enum Tab {
 	SIGN_IN = 1,
 	SIGN_UP = 2,
@@ -38,13 +38,9 @@ export const menu = (
 			{
 				key: '1',
 				label: (
-					<a
-						target='_blank'
-						rel='noopener noreferrer'
-						href='https://www.antgroup.com'
-					>
+					<Link rel='noopener noreferrer' to='/my-order'>
 						Đơn hàng của tôi
-					</a>
+					</Link>
 				),
 			},
 			{
@@ -69,39 +65,9 @@ export const menu = (
 
 const Navbar = () => {
 	const [textSearch, setTextSearch] = useState('');
+	const [visibility, setVisibility] = useState(false);
 	const [products, setProducts] = useState([]);
-	const user = useAppSelector((state) => userSelector(state));
-	const [dialog, setDialog] = useState(Tab.SIGN_IN);
-	const [isModalVisible, setIsModalVisible] = useState(false);
-
-	useEffect(() => {
-		if (user?.isLogin) {
-			setIsModalVisible(false);
-		}
-	}, [user]);
-
-	const showModal = () => {
-		setIsModalVisible(true);
-	};
-	const handlerSetDialog = () => {
-		setDialog(Tab.SIGN_UP);
-	};
-	const Dialog = () => {
-		switch (dialog) {
-			case Tab.SIGN_IN:
-				return (
-					<SignInPage
-						show={isModalVisible}
-						setShow={setIsModalVisible}
-						onClick={handlerSetDialog}
-					/>
-				);
-			case Tab.SIGN_UP:
-				return <SignUpPage show={isModalVisible} setShow={setIsModalVisible} />;
-			default:
-				return <></>;
-		}
-	};
+	const user: any = useAppSelector((state) => userSelector(state));
 	const debounceValue = useDebounce(textSearch, 800);
 	useEffect(() => {
 		if (!debounceValue.trim()) {
@@ -110,20 +76,25 @@ const Navbar = () => {
 		const handlerSearch = async () => {
 			const { data }: any = await searchProduct(debounceValue);
 			setProducts(data);
+			setVisibility(true);
 		};
 		handlerSearch();
 	}, [debounceValue]);
 
 	return (
 		<>
-			{Dialog()}
 			<WrapperStyled>
 				<ContainerStyled>
 					<ContentStyled>
 						<LogoStyled to='/'>
 							<img src={logos} alt='logo' />
 						</LogoStyled>
-						<SearchInput data={products} onChange={setTextSearch} />
+						<SearchInput
+							data={products}
+							onChange={setTextSearch}
+							visibility={visibility}
+							setVisibility={setVisibility}
+						/>
 						<ActionsStyled className='action'>
 							<Button color='white'>
 								Gọi mua hàng <br />
@@ -161,7 +132,7 @@ const Navbar = () => {
 								<Button
 									color='white'
 									icon={<UserOutlined style={{ fontSize: '26px' }} />}
-									onClick={showModal}
+									href='/sign-in'
 								>
 									Đăng
 									<br /> nhập

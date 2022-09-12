@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import axios from 'axios';
@@ -15,8 +16,12 @@ export const setStatusFetchProduct = (data: {
 }) => {
 	return instance.patch('/products/' + data.id, data);
 };
-export const getProducts = () => {
-	return instance.get('/products');
+export const getProducts = (id: any) => {
+	let url = '/products?_sort=id&_order=desc';
+	if (id) {
+		url += `&&categoryId=${id}`;
+	}
+	return instance.get(url);
 };
 export const searchProduct = (text: string) => {
 	return instance.get('/products?q=' + text);

@@ -13,8 +13,16 @@ import watch from '~/assets/logo/watch.png';
 import arrowLeft from '~/assets/logo/arrow-left.png';
 import dienthoaivui from '~/assets/logo/dienthoaivui.png';
 import logo from '~/assets/logo/logos.png';
+import anhhtusLogo2 from '~/assets/logo/anhhtus-logo2.png';
+import facebook from '~/assets/logo/facebook.png';
+import google from '~/assets/logo/google.png';
+import cart from '~/assets/logo/cart.svg';
 
 const images = {
+	cart,
+	facebook,
+	google,
+	anhhtusLogo2,
 	logo,
 	dienthoaivui,
 	arrowLeft,

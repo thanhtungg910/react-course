@@ -28,9 +28,10 @@ const columns = [
 		title: Columns.DESC,
 		render: (item: ProductType) => {
 			return (
-				<p className='w-60 text-ellipsis whitespace-nowrap overflow-hidden'>
-					{item.description}
-				</p>
+				<p
+					className='w-60 h-20 text-ellipsis whitespace-nowrap overflow-hidden'
+					dangerouslySetInnerHTML={{ __html: item.description }}
+				/>
 			);
 		},
 	},
@@ -77,7 +78,7 @@ const ProductList = () => {
 	}
 
 	useEffect(() => {
-		filterData();
+		filterData('');
 	}, []);
 
 	const handlerOnChange = useCallback((e: string) => {

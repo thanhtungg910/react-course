@@ -6,8 +6,10 @@ import { privateRoutes, publicRoutes } from './routes/routes';
 const DashBoardLazy = lazy(() => import('./layouts/Dash-board'));
 const MainLayoutLazy = lazy(() => import('./layouts/MainLayout'));
 
+const SignInPage = lazy(() => import('~/features/user/sign-in/SignInPage'));
+const SignUpPage = lazy(() => import('~/features/user/sign-up/SignUpPage'));
 function App() {
-	const { user } = useAppSelector((state) => userSelector(state));
+	const user = useAppSelector((state) => userSelector(state));
 	const { pathname } = useLocation();
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -30,7 +32,9 @@ function App() {
 					</Route>
 					<Route
 						path='dash-board'
-						element={user?.id !== 1 ? <Navigate to='/' /> : <DashBoardLazy />}
+						element={
+							user?.user?.id !== 1 ? <Navigate to='/' /> : <DashBoardLazy />
+						}
 					>
 						{privateRoutes.map((item, index) => {
 							let Comp;
@@ -42,11 +46,21 @@ function App() {
 									caseSensitive={true}
 									key={index}
 									path={item.path}
-									element={user?.id !== 1 ? <Navigate to='/' /> : <Comp />}
+									element={
+										user?.user?.id !== 1 ? <Navigate to='/' /> : <Comp />
+									}
 								></Route>
 							);
 						})}
 					</Route>
+					<Route
+						path='/sign-up'
+						element={user?.isLogin ? <Navigate to='/' /> : <SignUpPage />}
+					></Route>
+					<Route
+						path='/sign-in'
+						element={user?.isLogin ? <Navigate to='/' /> : <SignInPage />}
+					></Route>
 				</Routes>
 			</Suspense>
 		</>

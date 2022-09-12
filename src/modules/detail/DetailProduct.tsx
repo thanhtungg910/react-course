@@ -276,6 +276,7 @@ const DetailProduct = ({
 						})}
 					</p>
 				</BoxInfoStyled>
+				<div dangerouslySetInnerHTML={{ __html: data?.desc_short }} />
 				<BoxOptionsStyled>
 					<div className='title'>Chọn màu để xem giá và chi nhánh có hàng</div>
 					<div className='options'>
